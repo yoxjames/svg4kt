@@ -20,21 +20,88 @@ package dev.jamesyox.svg4k.attr.types.obj
 import dev.jamesyox.svg4k.attr.ConstantSvgAttributeType
 import dev.jamesyox.svg4k.attr.SvgAttributeType
 
+/**
+ * Color type used for SVGs.
+ */
 public interface SvgColor : SvgAttributeType {
+    /**
+     * RGB (RED, GREEN, BLUE). Outputted like `rgb($red, $green, $blue)` in SVG.
+     */
     public class RGB(red: Int, green: Int, blue: Int): SvgColor {
         public override val svgString: String = "rgb($red,$green,$blue)"
     }
-    public class Hex(value: Int): SvgColor {
-        public override val svgString: String = value.toHexString(
-            HexFormat {
-                upperCase = false
-                number {
-                    prefix = "#"
-                    removeLeadingZeros = true
+
+    /**
+     * A RGB "hexidecimal" value. While these take numbers they are really a set of hexadecimal numbers representing
+     * different color channels. For instance, `#000011` and `#00000011` are the same number `0x00000011` but represent
+     * very different colors in SVG/CSS. Therefore you must declare the format before passing a number. [RGB] and [RGBA]
+     * for instance.
+     *
+     * @see [RGB]
+     */
+    public sealed interface Hex : SvgColor {
+
+        /**
+         * A RGB Color in the `#RRGGBB` syntax. Contains three bytes where the first represents Red, The second Green,
+         * and the third and final byte blue. Takes a [Int] as [value] which should contain those bytes. For example
+         * the following shows how to construct colors for common SVG/CSS syntax
+         * ```
+         * SvgColor.Hex.RGB(0xffffff) // SVG COLOR: #ffffff
+         * SvgColor.Hex.RGB(0x34ebe5) // SVG COLOR: #35ebe5
+         *
+         */
+        public class RGB(value: Int): Hex {
+            internal companion object {
+                val format = HexFormat {
+                    number {
+                        prefix = "#"
+                        removeLeadingZeros = true
+                        minLength = 6
+                    }
                 }
             }
-        )
+            override val svgString: String = value.coerceAtLeast(0).toHexString(format).take(7)
+        }
+
+        /**
+         * A RGB Color in the `#RRGGBBAA` syntax. Contains three bytes where the first represents red, The second green,
+         * the third blue, and finally the fourth byte represents alpha Takes a [Int] as [value] which should contain
+         * those bytes. For example the following shows how to construct colors for common SVG/CSS syntax
+         * ```
+         * SvgColor.Hex.RGBA(0xffffffff) // SVG COLOR: #ffffffff
+         * SvgColor.Hex.RGBA(0xff000080) // SVG COLOR: #ff000080
+         *
+         */
+        public class RGBA(value: Long): Hex {
+            internal companion object {
+                val format = HexFormat {
+                    number {
+                        prefix = "#"
+                        removeLeadingZeros = true
+                        minLength = 8
+                    }
+                }
+            }
+            override val svgString: String = value.coerceAtLeast(0).toHexString(format).take(9)
+        }
     }
+
+    /**
+     * Unsafe color that allows any value to be inserted as a color.
+     */
+    public class Unsafe internal constructor(value: String): SvgColor {
+        override val svgString: String = value
+    }
+
+    /**
+     * Construct an unsafe color
+     * @param value: The value you want to insert for the color. Can be any string.
+     */
+    context(_: dev.jamesyox.svg4k.meta.Unsafe)
+    public fun Unsafe(value: String): Unsafe {
+        return Unsafe(value)
+    }
+
     public data object AliceBlue : SvgColor, ConstantSvgAttributeType("aliceblue")
     public data object AntiqueWhite	: SvgColor, ConstantSvgAttributeType("antiquewhite")
     public data object Aqua	: SvgColor, ConstantSvgAttributeType("aqua")

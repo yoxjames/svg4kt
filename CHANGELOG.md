@@ -1,3 +1,11 @@
+## 0.1.0-beta.1
+* `SvgColor.Hex(...)` no longer takes a number. This was wrong from the beginning. SVG's hex colors are a format
+  For instance `0x00111111` and `0x111111` are the same number but different colors. Therefore, you now must declare the
+  format: `SvgColor.Hex.RGB(0x111111)` vs `SvgColor.Hex.RGBA(0x00111111)`
+* Added an `Unsafe` color type as there are a _lot_ of color types, and I am not sure if I will ever support them all.
+  Almost feels like that should be its own full library.
+* Bumped Various Versions. 
+
 ## 0.1.0-alpha.3
 * Removed `BasicShape` from `clipPath` attribute. This really feels like mixing the CSS and SVG spec to me and I want
   this library to be purely SVG. From what I can tell the SVG 1.1 spec only really supports FuncIRI notation.

@@ -97,7 +97,7 @@ class FeSpecularLightingTest {
                     feSpecularLighting {
                         result = "specOut"
                         specularExponent = 20
-                        lightingColor = SvgColor.Hex(0xbbbbbb)
+                        lightingColor = SvgColor.Hex.RGB(0xbbbbbb)
                         fePointLight {
                             x = 50
                             y = 75

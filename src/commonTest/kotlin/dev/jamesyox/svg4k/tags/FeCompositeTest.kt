@@ -351,7 +351,7 @@ class FeCompositeTest {
                         cx = 90.px
                         cy = 80.px
                         r = 70.px
-                        fill(SvgColor.Hex(0xcc0000))
+                        fill(SvgColor.Hex.RGB(0xcc0000))
                         filter(imageOver)
                     }
                     text {
@@ -368,7 +368,7 @@ class FeCompositeTest {
                         cx = 90.px
                         cy = 80.px
                         r = 70.px
-                        fill(SvgColor.Hex(0xcc0000))
+                        fill(SvgColor.Hex.RGB(0xcc0000))
                         filter(imageIn)
                     }
                     text {
@@ -385,7 +385,7 @@ class FeCompositeTest {
                         cx = 90.px
                         cy = 80.px
                         r = 70.px
-                        fill(SvgColor.Hex(0xcc0000))
+                        fill(SvgColor.Hex.RGB(0xcc0000))
                         filter(imageOut)
                     }
                     text {
@@ -402,7 +402,7 @@ class FeCompositeTest {
                         cx = 90.px
                         cy = 80.px
                         r = 70.px
-                        fill(SvgColor.Hex(0xcc0000))
+                        fill(SvgColor.Hex.RGB(0xcc0000))
                         filter(imageAtop)
                     }
                     text {
@@ -419,7 +419,7 @@ class FeCompositeTest {
                         cx = 90.px
                         cy = 80.px
                         r = 70.px
-                        fill(SvgColor.Hex(0xcc0000))
+                        fill(SvgColor.Hex.RGB(0xcc0000))
                         filter(imageXor)
                     }
                     text {
@@ -436,7 +436,7 @@ class FeCompositeTest {
                         cx = 90.px
                         cy = 80.px
                         r = 70.px
-                        fill(SvgColor.Hex(0xcc0000))
+                        fill(SvgColor.Hex.RGB(0xcc0000))
                         filter(imageArithmetic)
                     }
                     text {
@@ -453,7 +453,7 @@ class FeCompositeTest {
                         cx = 90.px
                         cy = 80.px
                         r = 70.px
-                        fill(SvgColor.Hex(0xcc0000))
+                        fill(SvgColor.Hex.RGB(0xcc0000))
                         filter(imageLighter)
                     }
                     text {

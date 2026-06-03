@@ -52,6 +52,7 @@ kotlin {
         freeCompilerArgs.add("-Xallow-contracts-on-more-functions")
         freeCompilerArgs.add("-opt-in=kotlin.contracts.ExperimentalContracts")
         freeCompilerArgs.add("-Xreturn-value-checker=full")
+        freeCompilerArgs.add("-Xcontext-parameters")
     }
     explicitApi()
     jvm {
@@ -114,9 +115,6 @@ kotlin {
     mingwX64()
 
     sourceSets {
-        all {
-            languageSettings.enableLanguageFeature("ContextParameters")
-        }
         commonMain
         commonTest {
             dependencies {

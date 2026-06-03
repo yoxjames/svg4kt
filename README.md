@@ -1,4 +1,4 @@
-# svg4k
+# SVG For Kotlin (svg4k)
 ![Maven Central Version](https://img.shields.io/maven-central/v/dev.jamesyox/svg4k)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Kotlin](https://img.shields.io/badge/kotlin-2.3.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
@@ -16,6 +16,9 @@ current state, this library is not up to my standards for "open source." I encou
 page but be aware that there may be bugs. See the section below on the `unsafe` API for says to get around any bugs you
 face. I encourage feedback and plan to continue developing this into a high quality open source library.
 
+This artifact is now being used for my [Kastro Demo](https://github.com/yoxjames/kastro-demo) project to render all the
+SVGs.
+
 ## Getting Started
 An alpha version of this library is published on Maven Central.
 Coordinates:
@@ -24,25 +27,27 @@ groupId: `dev.jamesyox`
 
 artifactId: `svg4k`
 
-version: `0.1.0-alpha.3`
+version: `0.1.0-beta.1`
 
 If you use Gradle you should be able to add the following to your dependencies to use svg4k:
 ```kotlin
-implementation("dev.jamesyox:svg4k:0.1.0-alpha.3")
+implementation("dev.jamesyox:svg4k:0.1.0-beta.1")
 ```
 
 You are now free to use this in a project, however you _must_ enable context parameters. This library is based around
-that feature. 
+that feature. If you are using Kotlin 2.4.0 or greater, then context parameters are stable, and you do not need to 
+enable anything. 
 
 ```kotlin
 // build.gradle.kts
 kotlin {
     compilerOptions {
+        // Wont be required once Kotlin 2.4.0 releases
         freeCompilerArgs.add("-Xcontext-parameters")
     }
 }
 // ....
-implementation("dev.jamesyox:svg4k:0.1.0-alpha.3")
+implementation("dev.jamesyox:svg4k:0.1.0-beta.1")
 ```
 
 Please note that this library is an alpha and is based around a currently experimental Kotlin language feature. Therefore, you should 
@@ -189,6 +194,11 @@ fun <T> TagConsumer<HTMLElement>.svgMagick(
 I'm hoping to open a PR with `kotlinx-html` soon that should make seamless interop possible. 
 
 PR: https://github.com/Kotlin/kotlinx.html/pull/296
+
+If you want to see a full project using the library like this please check out my Kastro Demo project. It's a simple
+static site that can show you information about the sun and moon via SVGs done locally in your browser!
+
+https://github.com/yoxjames/kastro-demo
 
 ## Unsafe DSL
 This library may have bugs. A lot of those bugs may be around typing and scoping. Lets say for some reason `cx` was
