@@ -27,7 +27,8 @@ import kotlin.test.assertEquals
 class MetadataTest {
     @Test
     fun contrivedExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="-10 -10 120 120">
@@ -35,16 +36,17 @@ class MetadataTest {
                     Something
                 </metadata>
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                viewBox = ViewBox(-10, -10, 120, 120)
-                metadata {
-                    +"Something"
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    viewBox = ViewBox(-10, -10, 120, 120)
+                    metadata {
+                        +"Something"
+                    }
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }

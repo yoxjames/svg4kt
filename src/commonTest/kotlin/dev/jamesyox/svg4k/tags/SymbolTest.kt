@@ -46,7 +46,8 @@ import kotlin.test.assertEquals
 class SymbolTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 80 20">
@@ -90,73 +91,74 @@ class SymbolTest {
                     y="5"
                     opacity="0.2" />
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val myDot = SvgId("myDot")
-                viewBox = ViewBox(0, 0, 80, 20)
-                symbol {
-                    id = myDot
-                    width = 10.none
-                    height = 10.none
-                    viewBox = ViewBox(0, 0, 2, 2)
-                    circle {
-                        cx = 1.none
-                        cy = 1.none
-                        r = 1.none
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val myDot = SvgId("myDot")
+                    viewBox = ViewBox(0, 0, 80, 20)
+                    symbol {
+                        id = myDot
+                        width = 10.none
+                        height = 10.none
+                        viewBox = ViewBox(0, 0, 2, 2)
+                        circle {
+                            cx = 1.none
+                            cy = 1.none
+                            r = 1.none
+                        }
                     }
-                }
-                path {
-                    d {
-                        M(0, 10)
-                        h(80)
-                        M(10, 0)
-                        v(20)
-                        M(25, 0)
-                        v(20)
-                        M(40, 0)
-                        v(20)
-                        M(55, 0)
-                        v(20)
-                        M(70, 0)
-                        v(20)
+                    path {
+                        d {
+                            M(0, 10)
+                            h(80)
+                            M(10, 0)
+                            v(20)
+                            M(25, 0)
+                            v(20)
+                            M(40, 0)
+                            v(20)
+                            M(55, 0)
+                            v(20)
+                            M(70, 0)
+                            v(20)
+                        }
+                        fill = SvgPaint.None
+                        stroke(SvgColor.Pink)
                     }
-                    fill = SvgPaint.None
-                    stroke(SvgColor.Pink)
-                }
-                use {
-                    href(myDot)
-                    x = 5.none
-                    y = 5.none
-                    opacity = 1.0f
-                }
-                use {
-                    href(myDot)
-                    x = 20.none
-                    y = 5.none
-                    opacity = 0.8f
-                }
-                use {
-                    href(myDot)
-                    x = 35.none
-                    y = 5.none
-                    opacity = 0.6f
-                }
-                use {
-                    href(myDot)
-                    x = 50.none
-                    y = 5.none
-                    opacity = 0.4f
-                }
-                use {
-                    href(myDot)
-                    x = 65.none
-                    y = 5.none
-                    opacity = 0.2f
+                    use {
+                        href(myDot)
+                        x = 5.none
+                        y = 5.none
+                        opacity = 1.0f
+                    }
+                    use {
+                        href(myDot)
+                        x = 20.none
+                        y = 5.none
+                        opacity = 0.8f
+                    }
+                    use {
+                        href(myDot)
+                        x = 35.none
+                        y = 5.none
+                        opacity = 0.6f
+                    }
+                    use {
+                        href(myDot)
+                        x = 50.none
+                        y = 5.none
+                        opacity = 0.4f
+                    }
+                    use {
+                        href(myDot)
+                        x = 65.none
+                        y = 5.none
+                        opacity = 0.2f
+                    }
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }

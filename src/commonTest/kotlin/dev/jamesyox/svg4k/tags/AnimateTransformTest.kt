@@ -43,7 +43,8 @@ import kotlin.time.Duration.Companion.seconds
 class AnimateTransformTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="120"
@@ -61,30 +62,32 @@ class AnimateTransformTest {
                         repeatCount="indefinite" />
                 </polygon>
             </svg>
-        """.trimIndent()
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                width = 120.none
-                height = 120.none
-                viewBox = ViewBox(0, 0, 120, 120)
-                polygon {
-                    points = listOf(
-                        Point(60, 30),
-                        Point(90, 90),
-                        Point(30, 90)
-                    )
-                    animateTransform {
-                        attributeName="transform"
-                        attributeType = AttributeType.XML
-                        type = AnimateTransformType.Rotate
-                        from = "0 60 70"
-                        to = "360 60 70"
-                        dur(10.seconds)
-                        repeatCount = RepeatCount.Indefinite
+            """.trimIndent()
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    width = 120.none
+                    height = 120.none
+                    viewBox = ViewBox(0, 0, 120, 120)
+                    polygon {
+                        points =
+                            listOf(
+                                Point(60, 30),
+                                Point(90, 90),
+                                Point(30, 90),
+                            )
+                        animateTransform {
+                            attributeName = "transform"
+                            attributeType = AttributeType.XML
+                            type = AnimateTransformType.Rotate
+                            from = "0 60 70"
+                            to = "360 60 70"
+                            dur(10.seconds)
+                            repeatCount = RepeatCount.Indefinite
+                        }
                     }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 }

@@ -31,20 +31,21 @@ import kotlin.contracts.contract
 public class SVGStreamTagConsumer<T : Appendable>(
     private val appendable: T,
     private val isPrettyPrint: Boolean,
-): TagConsumer<T> {
+) : TagConsumer<T> {
     private var level = 0
     private var isTagOpen: Boolean = false
     private var lastTag: Pair<Int, SvgTag>? = null
 
     override val attributeConsumer: InMemoryAttributeConsumer = InMemoryAttributeConsumer()
 
-    override fun onTagStart(tag: SvgTag): Unit = with(appendable) {
-        if (isTagOpen) {
-            append(">")
-            if (isPrettyPrint) appendLn()
-        }
-        lastTag = level to tag
-        val hasAttributes = attributeConsumer.attributesMap.isNotEmpty()
+    override fun onTagStart(tag: SvgTag): Unit =
+        with(appendable) {
+            if (isTagOpen) {
+                append(">")
+                if (isPrettyPrint) appendLn()
+            }
+            lastTag = level to tag
+            val hasAttributes = attributeConsumer.attributesMap.isNotEmpty()
             appendIndented(level = level, text = "<${tag.tagName}")
             if (isPrettyPrint && hasAttributes) {
                 appendLn()
@@ -58,50 +59,59 @@ public class SVGStreamTagConsumer<T : Appendable>(
                         // Go in one level since we want to indent attributes. No need to mutate the level though
                         separator = if (isPrettyPrint) "\n${indented(level + 1)}" else " ",
                         prefix = if (isPrettyPrint) indented(level + 1) else "",
-                        transform = { "${it.first}=\"${it.second}\"" }
+                        transform = { "${it.first}=\"${it.second}\"" },
                     ).also { append(it) }
             }
-        isTagOpen = true
-        attributeConsumer.clear()
-        level++
-    }
+            isTagOpen = true
+            attributeConsumer.clear()
+            level++
+        }
 
     private fun Appendable.appendLn() {
         append("\n")
     }
 
-    private fun Appendable.appendIndented(level: Int, text: String) {
+    private fun Appendable.appendIndented(
+        level: Int,
+        text: String,
+    ) {
         append("${indented(level)}$text")
     }
 
     private fun indented(count: Int) = if (isPrettyPrint) "    ".repeat(count) else ""
 
-    override fun onTagContent(content: String): Unit = with(appendable) {
-        if (isTagOpen) {
-            append(">")
+    override fun onTagContent(content: String): Unit =
+        with(appendable) {
+            if (isTagOpen) {
+                append(">")
+                if (isPrettyPrint) appendLn()
+                isTagOpen = false
+            }
+            if (isPrettyPrint) {
+                content
+                    .lines()
+                    .joinToString(separator = "\n") { "${indented(level)}$it" }
+                    .also { append(it) }
+            } else {
+                append(content)
+            }
             if (isPrettyPrint) appendLn()
-            isTagOpen = false
         }
-        if (isPrettyPrint) {
-            content
-                .lines()
-                .joinToString(separator = "\n") { "${indented(level)}$it" }
-                .also { append(it) }
-        } else {
-            append(content)
-        }
-        if (isPrettyPrint) appendLn()
-    }
 
     override fun onTagEnd(tag: SvgTag) {
         level--
         with(appendable) {
             when (lastTag == level to tag && isTagOpen) {
-                true -> append(" />")
-                false -> appendIndented(
-                    level = level,
-                    text = "</${tag.tagName}>"
-                )
+                true -> {
+                    append(" />")
+                }
+
+                false -> {
+                    appendIndented(
+                        level = level,
+                        text = "</${tag.tagName}>",
+                    )
+                }
             }
             if (isPrettyPrint && level > 0) appendLn()
         }
@@ -113,7 +123,7 @@ public class SVGStreamTagConsumer<T : Appendable>(
 
 public inline fun <T : Appendable> T.appendSVG(
     isPrettyPrint: Boolean = false,
-    block: context(TagConsumer<T>, RootContainer) () -> Unit
+    block: context(TagConsumer<T>, RootContainer) () -> Unit,
 ): T {
     contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
@@ -121,7 +131,7 @@ public inline fun <T : Appendable> T.appendSVG(
     return context(RootContainer) {
         SVGStreamTagConsumer(
             isPrettyPrint = isPrettyPrint,
-            appendable = this
+            appendable = this,
         ).delayed()
             .apply { block() }
             .output()
@@ -133,7 +143,7 @@ public inline fun <T : Appendable> T.appendSVG(
  */
 public inline fun svgString(
     isPrettyPrint: Boolean = false,
-    block: context(TagConsumer<StringBuilder>, RootContainer) () -> Unit
+    block: context(TagConsumer<StringBuilder>, RootContainer) () -> Unit,
 ): String {
     contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)

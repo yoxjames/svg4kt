@@ -91,6 +91,6 @@ public fun <T> svg(content: context(AttributeConsumer, @SvgTagDSL Svg) () -> Uni
         content = {
             xmlns = "http://www.w3.org/2000/svg"
             content()
-        }
+        },
     )
 }

@@ -38,7 +38,8 @@ import kotlin.test.assertEquals
 class RadialGradientTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 10 10">
@@ -59,33 +60,34 @@ class RadialGradientTest {
                     r="4"
                     fill="url(#myGradient)" />
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val myGradient = SvgId("myGradient")
-                viewBox = ViewBox(0, 0, 10, 10)
-                defs {
-                    radialGradient {
-                        id = myGradient
-                        stop {
-                            offset = 10.pct
-                            stopColor = SvgColor.Gold
-                        }
-                        stop {
-                            offset = 95.pct
-                            stopColor = SvgColor.Red
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val myGradient = SvgId("myGradient")
+                    viewBox = ViewBox(0, 0, 10, 10)
+                    defs {
+                        radialGradient {
+                            id = myGradient
+                            stop {
+                                offset = 10.pct
+                                stopColor = SvgColor.Gold
+                            }
+                            stop {
+                                offset = 95.pct
+                                stopColor = SvgColor.Red
+                            }
                         }
                     }
-                }
-                circle {
-                    cx = 5.none
-                    cy = 5.none
-                    r = 4.none
-                    fill(myGradient)
+                    circle {
+                        cx = 5.none
+                        cy = 5.none
+                        r = 4.none
+                        fill(myGradient)
+                    }
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }

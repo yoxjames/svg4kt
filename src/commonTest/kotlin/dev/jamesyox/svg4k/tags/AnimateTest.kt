@@ -37,7 +37,8 @@ class AnimateTest {
     // https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/animate
     @Test
     fun mozillaExampleTest() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 10 10">
@@ -51,22 +52,23 @@ class AnimateTest {
                         repeatCount="indefinite" />
                 </rect>
             </svg>
-        """.trimIndent()
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                viewBox = ViewBox(0, 0, 10, 10)
-                rect {
-                    width = 10.none
-                    height = 10.none
-                    animate {
-                        attributeName = "rx"
-                        values = listOf("0", "5", "0")
-                        dur = Dur.ClockValue(10.seconds)
-                        repeatCount = RepeatCount.Indefinite
+            """.trimIndent()
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    viewBox = ViewBox(0, 0, 10, 10)
+                    rect {
+                        width = 10.none
+                        height = 10.none
+                        animate {
+                            attributeName = "rx"
+                            values = listOf("0", "5", "0")
+                            dur = Dur.ClockValue(10.seconds)
+                            repeatCount = RepeatCount.Indefinite
+                        }
                     }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 }

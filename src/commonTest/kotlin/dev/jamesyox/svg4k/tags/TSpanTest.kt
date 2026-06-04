@@ -31,7 +31,8 @@ import kotlin.test.assertEquals
 class TSpanTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 240 40">
@@ -53,34 +54,37 @@ class TSpanTest {
                     a banana!
                 </text>
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                viewBox = ViewBox(0, 0, 240, 40)
-                style {
-                    +"""
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    viewBox = ViewBox(0, 0, 240, 40)
+                    style {
+                        +
+                            """
+                            text {
+                              font: italic 12px serif;
+                            }
+                            tspan {
+                              font: bold 10px sans-serif;
+                              fill: red;
+                            }
+                            """.trimIndent()
+                    }
                     text {
-                      font: italic 12px serif;
+                        x = listOf(10.none)
+                        y = listOf(30.none)
+                        `class` = "small"
+                        +
+                            """
+                            You are
+                            <tspan>not</tspan>
+                            a banana!
+                            """.trimIndent()
                     }
-                    tspan {
-                      font: bold 10px sans-serif;
-                      fill: red;
-                    }
-                    """.trimIndent()
-                }
-                text {
-                    x = listOf(10.none)
-                    y = listOf(30.none)
-                    `class` = "small"
-                    +"""
-                    You are
-                    <tspan>not</tspan>
-                    a banana!
-                    """.trimIndent()
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }

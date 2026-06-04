@@ -36,7 +36,8 @@ import kotlin.test.assertEquals
 class ATest {
     @Test
     fun mozillaTest() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 100 100">
@@ -57,29 +58,30 @@ class ATest {
                     </text>
                 </a>
             </svg>
-        """.trimIndent()
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                viewBox = ViewBox(0, 0, 100, 100)
-                a {
-                    href = "/docs/Web/SVG/Reference/Element/circle"
-                    circle {
-                        cx = 50.none
-                        cy = 40.none
-                        r = 35.none
+            """.trimIndent()
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    viewBox = ViewBox(0, 0, 100, 100)
+                    a {
+                        href = "/docs/Web/SVG/Reference/Element/circle"
+                        circle {
+                            cx = 50.none
+                            cy = 40.none
+                            r = 35.none
+                        }
                     }
-                }
-                a {
-                    href = "/docs/Web/SVG/Reference/Element/text"
-                    text {
-                        x = listOf(50.none)
-                        y = listOf(90.none)
-                        textAnchor = TextAnchor.Middle
-                        +"&lt;circle&gt;"
+                    a {
+                        href = "/docs/Web/SVG/Reference/Element/text"
+                        text {
+                            x = listOf(50.none)
+                            y = listOf(90.none)
+                            textAnchor = TextAnchor.Middle
+                            +"&lt;circle&gt;"
+                        }
                     }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 }

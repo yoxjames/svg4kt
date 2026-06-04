@@ -34,7 +34,8 @@ import kotlin.test.assertFailsWith
 class SVGStreamTagConsumerTest {
     @Test
     fun attributesAfterChildrenTest() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 10 10">
@@ -47,7 +48,7 @@ class SVGStreamTagConsumerTest {
                     </desc>
                 </circle>
             </svg>
-        """.trimIndent()
+            """.trimIndent()
         assertFailsWith<IllegalStateException> {
             svgString(isPrettyPrint = true) {
                 svg {

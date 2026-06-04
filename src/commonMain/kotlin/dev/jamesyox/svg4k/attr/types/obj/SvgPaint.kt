@@ -23,8 +23,18 @@ import dev.jamesyox.svg4k.attr.WrappedSvgAttributeType
 
 public interface SvgPaint : SvgAttributeType {
     public data object None : SvgPaint, ConstantSvgAttributeType("none")
+
     public data object ContextFill : SvgPaint, ConstantSvgAttributeType("context-fill")
+
     public data object ContextStroke : SvgPaint, ConstantSvgAttributeType("context-stroke")
-    public class Url(public val value: dev.jamesyox.svg4k.attr.types.obj.Url): SvgPaint, WrappedSvgAttributeType(value)
-    public class Color(public val value: SvgColor): SvgPaint, WrappedSvgAttributeType(value)
+
+    public class Url(
+        public val value: dev.jamesyox.svg4k.attr.types.obj.Url,
+    ) : WrappedSvgAttributeType(value),
+        SvgPaint
+
+    public class Color(
+        public val value: SvgColor,
+    ) : WrappedSvgAttributeType(value),
+        SvgPaint
 }

@@ -29,7 +29,7 @@ import dev.jamesyox.svg4k.attr.AttributeConsumer
  */
 internal class FinalizeTagConsumer<F, T>(
     private val delegate: TagConsumer<F>,
-    private val block: (F, Boolean) -> T
+    private val block: (F, Boolean) -> T,
 ) : TagConsumer<T> {
     private var level = 0
 
@@ -45,13 +45,13 @@ internal class FinalizeTagConsumer<F, T>(
 
     override fun onTagContent(content: String) = delegate.onTagContent(content)
 
-    override fun output(): T {
-        return block(delegate.output(), level > 0)
-    }
+    override fun output(): T = block(delegate.output(), level > 0)
 
     override val attributeConsumer: AttributeConsumer get() = delegate.attributeConsumer
 }
 
-public fun <T> TagConsumer<T>.onFinalize(block: (T, Boolean) -> Unit): TagConsumer<T> {
-    return FinalizeTagConsumer(this) { to, partial -> block(to, partial); to }
-}
+public fun <T> TagConsumer<T>.onFinalize(block: (T, Boolean) -> Unit): TagConsumer<T> =
+    FinalizeTagConsumer(this) { to, partial ->
+        block(to, partial)
+        to
+    }

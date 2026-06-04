@@ -32,7 +32,8 @@ import kotlin.test.assertEquals
 class PolylineTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 200 100">
@@ -43,31 +44,34 @@ class PolylineTest {
                     fill="none"
                     stroke="black" />
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                viewBox = ViewBox(0, 0, 200, 100)
-                polyline {
-                    points = listOf(
-                        Point(0, 100),
-                        Point(50, 25),
-                        Point(50, 75),
-                        Point(100, 0)
-                    )
-                }
-                polyline {
-                    points = listOf(
-                        Point(100, 100),
-                        Point(150, 25),
-                        Point(150, 75),
-                        Point(200, 0)
-                    )
-                    fill = SvgPaint.None
-                    stroke(SvgColor.Black)
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    viewBox = ViewBox(0, 0, 200, 100)
+                    polyline {
+                        points =
+                            listOf(
+                                Point(0, 100),
+                                Point(50, 25),
+                                Point(50, 75),
+                                Point(100, 0),
+                            )
+                    }
+                    polyline {
+                        points =
+                            listOf(
+                                Point(100, 100),
+                                Point(150, 25),
+                                Point(150, 75),
+                                Point(200, 0),
+                            )
+                        fill = SvgPaint.None
+                        stroke(SvgColor.Black)
+                    }
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }

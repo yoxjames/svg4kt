@@ -27,7 +27,8 @@ import dev.jamesyox.svg4k.attr.AttributeConsumer
  */
 internal class DelayedTagConsumer<T>(
     private val child: TagConsumer<T>,
-) : TagConsumer<T>, AttributeConsumer {
+) : TagConsumer<T>,
+    AttributeConsumer {
     private var delayed: SvgTag? = null
 
     override fun onTagStart(tag: SvgTag) {
@@ -57,7 +58,10 @@ internal class DelayedTagConsumer<T>(
         }
     }
 
-    override fun set(key: String, value: String) {
+    override fun set(
+        key: String,
+        value: String,
+    ) {
         // I really hope there's a way to fix this some day. Kotlinx-Html has the same issue.
         if (delayed == null) {
             throw IllegalStateException("Attributes must be set before starting a child element!")

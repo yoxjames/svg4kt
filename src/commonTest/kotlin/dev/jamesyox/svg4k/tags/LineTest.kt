@@ -33,7 +33,8 @@ import kotlin.test.assertEquals
 class LineTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 100 100">
@@ -44,20 +45,21 @@ class LineTest {
                     y2="20"
                     stroke="black" />
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                viewBox = ViewBox(0, 0, 100, 100)
-                line {
-                    x1 = 0.none
-                    y1 = 80.none
-                    x2 = 100.none
-                    y2 = 20.none
-                    stroke(SvgColor.Black)
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    viewBox = ViewBox(0, 0, 100, 100)
+                    line {
+                        x1 = 0.none
+                        y1 = 80.none
+                        x2 = 100.none
+                        y2 = 20.none
+                        stroke(SvgColor.Black)
+                    }
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }

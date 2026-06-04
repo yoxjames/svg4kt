@@ -34,9 +34,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class KotlinxHtml {
-    private fun HTMLTag.svgk(
-        block: context(AttributeConsumer, @SvgTagDSL Svg) () -> Unit
-    ) {
+    private fun HTMLTag.svgk(block: context(AttributeConsumer, @SvgTagDSL Svg) () -> Unit) {
         unsafe {
             raw(svgString { svg { block() } })
         }
@@ -45,24 +43,28 @@ class KotlinxHtml {
     @Test
     fun basicHappyPathTest() {
         // TODO: kotlinx-html has an extra line at the end?
-        val expected = """
+        val expected =
+            """
             <html>
               <body>
                 <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" /></div>
               </body>
             </html>
             
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = StringBuilder().appendHTML(prettyPrint = true).html {
-            body {
-                div {
-                    svgk {
-                        viewBox = ViewBox(0, 0, 10, 10)
+        val actual =
+            StringBuilder()
+                .appendHTML(prettyPrint = true)
+                .html {
+                    body {
+                        div {
+                            svgk {
+                                viewBox = ViewBox(0, 0, 10, 10)
+                            }
+                        }
                     }
-                }
-            }
-        }.toString()
+                }.toString()
         assertEquals(expected, actual)
     }
 }

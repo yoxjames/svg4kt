@@ -29,13 +29,15 @@ import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 
 public class CustomElement(
-    override val tagName: String
-): SvgTag, AllElementContainer, AllAttributeContainer
+    override val tagName: String,
+) : SvgTag,
+    AllElementContainer,
+    AllAttributeContainer
 
 context(_: TagConsumer<T>, _: Unsafe)
 public fun <T> customElement(
     tagName: String,
-    content: context(AttributeConsumer, @SvgTagDSL CustomElement) () -> Unit
+    content: context(AttributeConsumer, @SvgTagDSL CustomElement) () -> Unit,
 ): T {
     contract {
         callsInPlace(content, InvocationKind.EXACTLY_ONCE)

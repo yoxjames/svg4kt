@@ -21,7 +21,9 @@ import dev.jamesyox.svg4k.attr.SvgAttributeType
 import kotlin.jvm.JvmInline
 
 @JvmInline
-public value class SvgId(public val value: String): SvgAttributeType {
+public value class SvgId(
+    public val value: String,
+) : SvgAttributeType {
     override val svgString: String get() = value
     public val idString: String get() = "#$svgString"
 }

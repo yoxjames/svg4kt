@@ -30,7 +30,8 @@ import kotlin.test.assertEquals
 class ForeignObjectTest {
     @Test
     fun contrivedExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg">
                 <foreignObject
@@ -41,18 +42,19 @@ class ForeignObjectTest {
                     Something in here!
                 </foreignObject>
             </svg>
-        """.trimIndent()
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                foreignObject {
-                    x = 20.none
-                    y = 20.none
-                    width = 160.none
-                    height = 160.none
-                    +"Something in here!"
+            """.trimIndent()
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    foreignObject {
+                        x = 20.none
+                        y = 20.none
+                        width = 160.none
+                        height = 160.none
+                        +"Something in here!"
+                    }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 }

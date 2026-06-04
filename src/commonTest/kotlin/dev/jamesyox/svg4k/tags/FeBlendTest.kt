@@ -44,7 +44,8 @@ import kotlin.test.assertEquals
 class FeBlendTest {
     @Test
     fun mozillaTest() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="200"
@@ -74,42 +75,43 @@ class FeBlendTest {
                     height="80%"
                     filter="url(#spotlight)" />
             </svg>
-        """.trimIndent()
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val filterId = SvgId("spotlight")
-                val floodFill = "floodFill"
-                width = 200.none
-                height = 200.none
-                defs {
-                    filter {
-                        id = filterId
-                        feFlood {
-                            result = "floodFill"
-                            x = 0.none
-                            y = 0.none
-                            width = 100.pct
-                            height = 100.pct
-                            floodColor = SvgColor.Green
-                            floodOpacity = 1f
-                        }
-                        feBlend {
-                            `in` = In.SourceGraphic
-                            in2 = In.Primitive(floodFill)
-                            mode = Mode.Multiply
+            """.trimIndent()
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val filterId = SvgId("spotlight")
+                    val floodFill = "floodFill"
+                    width = 200.none
+                    height = 200.none
+                    defs {
+                        filter {
+                            id = filterId
+                            feFlood {
+                                result = "floodFill"
+                                x = 0.none
+                                y = 0.none
+                                width = 100.pct
+                                height = 100.pct
+                                floodColor = SvgColor.Green
+                                floodOpacity = 1f
+                            }
+                            feBlend {
+                                `in` = In.SourceGraphic
+                                in2 = In.Primitive(floodFill)
+                                mode = Mode.Multiply
+                            }
                         }
                     }
-                }
-                image {
-                    href = "mdn_logo_only_color.png"
-                    x = 10.pct
-                    y = 10.pct
-                    width = 80.pct
-                    height = 80.pct
-                    filter(filterId)
+                    image {
+                        href = "mdn_logo_only_color.png"
+                        x = 10.pct
+                        y = 10.pct
+                        width = 80.pct
+                        height = 80.pct
+                        filter(filterId)
+                    }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 }

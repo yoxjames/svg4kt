@@ -29,7 +29,8 @@ import kotlin.test.assertEquals
 class SwitchTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 -20 100 50">
@@ -52,31 +53,32 @@ class SwitchTest {
                     </text>
                 </switch>
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                viewBox = ViewBox(0, -20, 100, 50)
-                switch {
-                    text {
-                        systemLanguage = listOf("de","nl")
-                        +"Hallo!"
-                    }
-                    text {
-                        systemLanguage = listOf("en-us")
-                        +"Howdy!"
-                    }
-                    text {
-                        systemLanguage = listOf("en-gb")
-                        +"Wotcha!"
-                    }
-                    text {
-                        requiredExtensions = listOf("http://example.org/lang/ext/emoji")
-                        +"☺"
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    viewBox = ViewBox(0, -20, 100, 50)
+                    switch {
+                        text {
+                            systemLanguage = listOf("de", "nl")
+                            +"Hallo!"
+                        }
+                        text {
+                            systemLanguage = listOf("en-us")
+                            +"Howdy!"
+                        }
+                        text {
+                            systemLanguage = listOf("en-gb")
+                            +"Wotcha!"
+                        }
+                        text {
+                            requiredExtensions = listOf("http://example.org/lang/ext/emoji")
+                            +"☺"
+                        }
                     }
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }

@@ -33,30 +33,33 @@ import kotlin.test.assertEquals
 class UnsafeTest {
     @Test
     fun testInvalidCircleInCircle() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg">
                 <circle>
                     <circle />
                 </circle>
             </svg>
-        """.trimIndent()
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                circle {
-                    unsafe {
-                        circle {
+            """.trimIndent()
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    circle {
+                        unsafe {
+                            circle {
+                            }
                         }
                     }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 
     @Test
     fun testInvalidUnsafeCascade() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg">
                 <circle>
@@ -64,45 +67,50 @@ class UnsafeTest {
                         fr="5" />
                 </circle>
             </svg>
-        """.trimIndent()
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                circle {
-                    unsafeCascading {
-                        rect { // This compiles but is not a valid SVG!
-                            fr = 5.none
+            """.trimIndent()
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    circle {
+                        unsafeCascading {
+                            rect {
+                                // This compiles but is not a valid SVG!
+                                fr = 5.none
+                            }
                         }
                     }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 
     @Test
     fun testManualAttrEntry() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg">
                 <circle
                     not-real="madeup" />
             </svg>
-        """.trimIndent()
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                circle {
-                    unsafe {
-                        attr["not-real"] = "madeup"
+            """.trimIndent()
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    circle {
+                        unsafe {
+                            attr["not-real"] = "madeup"
+                        }
                     }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 
     @Test
     fun testManualElement() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg">
                 <fake
@@ -110,19 +118,19 @@ class UnsafeTest {
                     <circle />
                 </fake>
             </svg>
-        """.trimIndent()
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                unsafe {
-                    customElement("fake") {
-                        fr = 5.none
-                        circle {
-
+            """.trimIndent()
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    unsafe {
+                        customElement("fake") {
+                            fr = 5.none
+                            circle {
+                            }
                         }
                     }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 }

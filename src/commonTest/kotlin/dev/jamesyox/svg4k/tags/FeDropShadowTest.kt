@@ -43,7 +43,8 @@ import kotlin.test.assertEquals
 class FeDropShadowTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 30 10">
@@ -92,66 +93,67 @@ class FeDropShadowTest {
                     fill="pink"
                     filter="url(#shadow3)" />
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val shadow = SvgId("shadow")
-                val shadow2 = SvgId("shadow2")
-                val shadow3 = SvgId("shadow3")
-                viewBox = ViewBox(0, 0, 30, 10)
-                defs {
-                    filter {
-                        id = shadow
-                        feDropShadow {
-                            dx = 0.2
-                            dy = 0.4
-                            stdDeviation = NumberOptionalNumber(0.2, null)
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val shadow = SvgId("shadow")
+                    val shadow2 = SvgId("shadow2")
+                    val shadow3 = SvgId("shadow3")
+                    viewBox = ViewBox(0, 0, 30, 10)
+                    defs {
+                        filter {
+                            id = shadow
+                            feDropShadow {
+                                dx = 0.2
+                                dy = 0.4
+                                stdDeviation = NumberOptionalNumber(0.2, null)
+                            }
+                        }
+                        filter {
+                            id = shadow2
+                            feDropShadow {
+                                dx = 0
+                                dy = 0
+                                stdDeviation = NumberOptionalNumber(0.5, null)
+                                floodColor = SvgColor.Cyan
+                            }
+                        }
+                        filter {
+                            id = shadow3
+                            feDropShadow {
+                                dx = -0.8
+                                dy = -0.8
+                                stdDeviation = NumberOptionalNumber(0, null)
+                                floodColor = SvgColor.Pink
+                                floodOpacity = 0.5
+                            }
                         }
                     }
-                    filter {
-                        id = shadow2
-                        feDropShadow {
-                            dx = 0
-                            dy = 0
-                            stdDeviation = NumberOptionalNumber(0.5, null)
-                            floodColor = SvgColor.Cyan
-                        }
+                    circle {
+                        cx = 5.none
+                        cy = 50.pct
+                        r = 4.none
+                        fill(SvgColor.Pink)
+                        filter(shadow)
                     }
-                    filter {
-                        id = shadow3
-                        feDropShadow {
-                            dx = -0.8
-                            dy = -0.8
-                            stdDeviation = NumberOptionalNumber(0, null)
-                            floodColor = SvgColor.Pink
-                            floodOpacity = 0.5
-                        }
+                    circle {
+                        cx = 15.none
+                        cy = 50.pct
+                        r = 4.none
+                        fill(SvgColor.Pink)
+                        filter(shadow2)
                     }
-                }
-                circle {
-                    cx = 5.none
-                    cy = 50.pct
-                    r = 4.none
-                    fill(SvgColor.Pink)
-                    filter(shadow)
-                }
-                circle {
-                    cx = 15.none
-                    cy = 50.pct
-                    r = 4.none
-                    fill(SvgColor.Pink)
-                    filter(shadow2)
-                }
-                circle {
-                    cx = 25.none
-                    cy = 50.pct
-                    r = 4.none
-                    fill(SvgColor.Pink)
-                    filter(shadow3)
+                    circle {
+                        cx = 25.none
+                        cy = 50.pct
+                        r = 4.none
+                        fill(SvgColor.Pink)
+                        filter(shadow3)
+                    }
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }

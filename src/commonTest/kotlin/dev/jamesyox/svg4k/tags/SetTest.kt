@@ -38,7 +38,8 @@ import kotlin.time.Duration.Companion.seconds
 class SetTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 10 10">
@@ -62,35 +63,37 @@ class SetTest {
                         dur="2s" />
                 </rect>
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                viewBox = ViewBox(0, 0, 10, 10)
-                style {
-                    +"""
-                        rect {
-                          cursor: pointer;
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    viewBox = ViewBox(0, 0, 10, 10)
+                    style {
+                        +
+                            """
+                            rect {
+                              cursor: pointer;
+                            }
+                            .round {
+                              rx: 5px;
+                              fill: green;
+                            }
+                            """.trimIndent()
+                    }
+                    rect {
+                        id = SvgId("me")
+                        width = 10.none
+                        height = 10.none
+                        set {
+                            attributeName = "class"
+                            to = "round"
+                            begin = "me.click"
+                            dur = Dur.ClockValue(2.seconds)
                         }
-                        .round {
-                          rx: 5px;
-                          fill: green;
-                        }
-                    """.trimIndent()
-                }
-                rect {
-                    id = SvgId("me")
-                    width = 10.none
-                    height = 10.none
-                    set {
-                        attributeName = "class"
-                        to = "round"
-                        begin = "me.click"
-                        dur = Dur.ClockValue(2.seconds)
                     }
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }

@@ -43,7 +43,8 @@ import kotlin.test.assertEquals
 class DefsTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 10 10">
@@ -70,42 +71,43 @@ class DefsTest {
                     href="#myCircle"
                     fill="url(#myGradient)" />
             </svg>
-        """.trimIndent()
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val myCircle = SvgId("myCircle")
-                val myGradient = SvgId("myGradient")
-                viewBox = ViewBox(0, 0, 10, 10)
-                defs {
-                    circle {
-                        id = myCircle
-                        cx = 0.none
-                        cy = 0.none
-                        r = 5.none
+            """.trimIndent()
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val myCircle = SvgId("myCircle")
+                    val myGradient = SvgId("myGradient")
+                    viewBox = ViewBox(0, 0, 10, 10)
+                    defs {
+                        circle {
+                            id = myCircle
+                            cx = 0.none
+                            cy = 0.none
+                            r = 5.none
+                        }
+                        linearGradient {
+                            id = myGradient
+                            gradientTransform {
+                                rotate(90)
+                            }
+                            stop {
+                                offset = 20.pct
+                                stopColor = SvgColor.Gold
+                            }
+                            stop {
+                                offset = 90.pct
+                                stopColor = SvgColor.Red
+                            }
+                        }
                     }
-                    linearGradient {
-                        id = myGradient
-                        gradientTransform {
-                            rotate(90)
-                        }
-                        stop {
-                            offset = 20.pct
-                            stopColor = SvgColor.Gold
-                        }
-                        stop {
-                            offset = 90.pct
-                            stopColor = SvgColor.Red
-                        }
+                    use {
+                        x = 5.none
+                        y = 5.none
+                        href(myCircle)
+                        fill(myGradient)
                     }
-                }
-                use {
-                    x = 5.none
-                    y = 5.none
-                    href(myCircle)
-                    fill(myGradient)
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 }

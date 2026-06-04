@@ -31,7 +31,8 @@ import kotlin.test.assertEquals
 class DescTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 10 10">
@@ -44,20 +45,21 @@ class DescTest {
                     </desc>
                 </circle>
             </svg>
-        """.trimIndent()
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                viewBox = ViewBox(0, 0, 10, 10)
-                circle {
-                    cx = 5.none
-                    cy = 5.none
-                    r = 4.none
-                    desc {
-                        +("I'm a circle and that description is here to demonstrate how I can be described.")
+            """.trimIndent()
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    viewBox = ViewBox(0, 0, 10, 10)
+                    circle {
+                        cx = 5.none
+                        cy = 5.none
+                        r = 4.none
+                        desc {
+                            +("I'm a circle and that description is here to demonstrate how I can be described.")
+                        }
                     }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 }

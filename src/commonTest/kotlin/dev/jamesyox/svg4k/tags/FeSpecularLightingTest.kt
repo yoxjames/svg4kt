@@ -52,7 +52,8 @@ import kotlin.test.assertEquals
 class FeSpecularLightingTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="200"
@@ -84,44 +85,45 @@ class FeSpecularLightingTest {
                     r="100"
                     filter="url(#filter)" />
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val filter = SvgId("filter")
-                height = 200.none
-                width = 200.none
-                viewBox = ViewBox(0, 0, 220, 220)
-                filter {
-                    id = filter
-                    feSpecularLighting {
-                        result = "specOut"
-                        specularExponent = 20
-                        lightingColor = SvgColor.Hex.RGB(0xbbbbbb)
-                        fePointLight {
-                            x = 50
-                            y = 75
-                            z = 200
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val filter = SvgId("filter")
+                    height = 200.none
+                    width = 200.none
+                    viewBox = ViewBox(0, 0, 220, 220)
+                    filter {
+                        id = filter
+                        feSpecularLighting {
+                            result = "specOut"
+                            specularExponent = 20
+                            lightingColor = SvgColor.Hex.RGB(0xbbbbbb)
+                            fePointLight {
+                                x = 50
+                                y = 75
+                                z = 200
+                            }
+                        }
+                        feComposite {
+                            `in` = In.SourceGraphic
+                            in2 = In.Primitive("specOut")
+                            operator = CompositeOperator.Arithmetic
+                            k1 = 0
+                            k2 = 1
+                            k3 = 1
+                            k4 = 0
                         }
                     }
-                    feComposite {
-                        `in` = In.SourceGraphic
-                        in2 = In.Primitive("specOut")
-                        operator = CompositeOperator.Arithmetic
-                        k1 = 0
-                        k2 = 1
-                        k3 = 1
-                        k4 = 0
+                    circle {
+                        cx = 110.none
+                        cy = 110.none
+                        r = 100.none
+                        filter(filter)
                     }
                 }
-                circle {
-                    cx = 110.none
-                    cy = 110.none
-                    r = 100.none
-                    filter(filter)
-                }
             }
-        }
 
         assertEquals(expected, actual)
     }

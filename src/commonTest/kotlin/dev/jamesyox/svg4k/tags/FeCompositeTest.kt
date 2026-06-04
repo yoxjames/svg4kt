@@ -50,7 +50,8 @@ import kotlin.test.assertEquals
 class FeCompositeTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -235,235 +236,236 @@ class FeCompositeTest {
                     </text>
                 </g>
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val imageOver = SvgId("imageOver")
-                val imageIn = SvgId("imageIn")
-                val imageOut = SvgId("imageOut")
-                val imageAtop = SvgId("imageAtop")
-                val imageXor = SvgId("imageXor")
-                val imageArithmetic = SvgId("imageArithmetic")
-                val imageLighter = SvgId("imageLighter")
-                defs {
-                    filter {
-                        id = imageOver
-                        feImage {
-                            href="mdn_logo_only_color.png"
-                            x = 10.px
-                            y = 10.px
-                            width = 160.px
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val imageOver = SvgId("imageOver")
+                    val imageIn = SvgId("imageIn")
+                    val imageOut = SvgId("imageOut")
+                    val imageAtop = SvgId("imageAtop")
+                    val imageXor = SvgId("imageXor")
+                    val imageArithmetic = SvgId("imageArithmetic")
+                    val imageLighter = SvgId("imageLighter")
+                    defs {
+                        filter {
+                            id = imageOver
+                            feImage {
+                                href = "mdn_logo_only_color.png"
+                                x = 10.px
+                                y = 10.px
+                                width = 160.px
+                            }
+                            feComposite {
+                                in2 = In.SourceGraphic
+                                operator = CompositeOperator.Over
+                            }
                         }
-                        feComposite {
-                            in2 = In.SourceGraphic
-                            operator = CompositeOperator.Over
+                        filter {
+                            id = imageIn
+                            feImage {
+                                href = "mdn_logo_only_color.png"
+                                x = 10.px
+                                y = 10.px
+                                width = 160.px
+                            }
+                            feComposite {
+                                in2 = In.SourceGraphic
+                                operator = CompositeOperator.In
+                            }
+                        }
+                        filter {
+                            id = imageOut
+                            feImage {
+                                href = "mdn_logo_only_color.png"
+                                x = 10.px
+                                y = 10.px
+                                width = 160.px
+                            }
+                            feComposite {
+                                in2 = In.SourceGraphic
+                                operator = CompositeOperator.Out
+                            }
+                        }
+                        filter {
+                            id = imageAtop
+                            feImage {
+                                href = "mdn_logo_only_color.png"
+                                x = 10.px
+                                y = 10.px
+                                width = 160.px
+                            }
+                            feComposite {
+                                in2 = In.SourceGraphic
+                                operator = CompositeOperator.Atop
+                            }
+                        }
+                        filter {
+                            id = imageXor
+                            feImage {
+                                href = "mdn_logo_only_color.png"
+                                x = 10.px
+                                y = 10.px
+                                width = 160.px
+                            }
+                            feComposite {
+                                in2 = In.SourceGraphic
+                                operator = CompositeOperator.Xor
+                            }
+                        }
+                        filter {
+                            id = imageArithmetic
+                            feImage {
+                                href = "mdn_logo_only_color.png"
+                                x = 10.px
+                                y = 10.px
+                                width = 160.px
+                            }
+                            feComposite {
+                                in2 = In.SourceGraphic
+                                operator = CompositeOperator.Arithmetic
+                                k1 = 0.1
+                                k2 = 0.2
+                                k3 = 0.3
+                                k4 = 0.4
+                            }
+                        }
+                        filter {
+                            id = imageLighter
+                            feImage {
+                                href = "mdn_logo_only_color.png"
+                                x = 10.px
+                                y = 10.px
+                                width = 160.px
+                            }
+                            feComposite {
+                                in2 = In.SourceGraphic
+                                operator = CompositeOperator.Lighter
+                            }
                         }
                     }
-                    filter {
-                        id = imageIn
-                        feImage {
-                            href="mdn_logo_only_color.png"
-                            x = 10.px
-                            y = 10.px
-                            width = 160.px
+                    g {
+                        transform {
+                            translate(0, 25)
                         }
-                        feComposite {
-                            in2 = In.SourceGraphic
-                            operator = CompositeOperator.In
+                        circle {
+                            cx = 90.px
+                            cy = 80.px
+                            r = 70.px
+                            fill(SvgColor.Hex.RGB(0xcc0000))
+                            filter(imageOver)
                         }
-                    }
-                    filter {
-                        id = imageOut
-                        feImage {
-                            href="mdn_logo_only_color.png"
-                            x = 10.px
-                            y = 10.px
-                            width = 160.px
-                        }
-                        feComposite {
-                            in2 = In.SourceGraphic
-                            operator = CompositeOperator.Out
+                        text {
+                            x = listOf(80.none)
+                            y = listOf((-5).none)
+                            +"over"
                         }
                     }
-                    filter {
-                        id = imageAtop
-                        feImage {
-                            href="mdn_logo_only_color.png"
-                            x = 10.px
-                            y = 10.px
-                            width = 160.px
+                    g {
+                        transform {
+                            translate(200, 25)
                         }
-                        feComposite {
-                            in2 = In.SourceGraphic
-                            operator = CompositeOperator.Atop
+                        circle {
+                            cx = 90.px
+                            cy = 80.px
+                            r = 70.px
+                            fill(SvgColor.Hex.RGB(0xcc0000))
+                            filter(imageIn)
                         }
-                    }
-                    filter {
-                        id = imageXor
-                        feImage {
-                            href="mdn_logo_only_color.png"
-                            x = 10.px
-                            y = 10.px
-                            width = 160.px
-                        }
-                        feComposite {
-                            in2 = In.SourceGraphic
-                            operator = CompositeOperator.Xor
+                        text {
+                            x = listOf(80.none)
+                            y = listOf((-5).none)
+                            +"in"
                         }
                     }
-                    filter {
-                        id = imageArithmetic
-                        feImage {
-                            href="mdn_logo_only_color.png"
-                            x = 10.px
-                            y = 10.px
-                            width = 160.px
+                    g {
+                        transform {
+                            translate(400, 25)
                         }
-                        feComposite {
-                            in2 = In.SourceGraphic
-                            operator = CompositeOperator.Arithmetic
-                            k1 = 0.1
-                            k2 = 0.2
-                            k3 = 0.3
-                            k4 = 0.4
+                        circle {
+                            cx = 90.px
+                            cy = 80.px
+                            r = 70.px
+                            fill(SvgColor.Hex.RGB(0xcc0000))
+                            filter(imageOut)
                         }
-                    }
-                    filter {
-                        id = imageLighter
-                        feImage {
-                            href="mdn_logo_only_color.png"
-                            x = 10.px
-                            y = 10.px
-                            width = 160.px
-                        }
-                        feComposite {
-                            in2 = In.SourceGraphic
-                            operator = CompositeOperator.Lighter
+                        text {
+                            x = listOf(80.none)
+                            y = listOf((-5).none)
+                            +"out"
                         }
                     }
-                }
-                g {
-                    transform {
-                        translate(0, 25)
+                    g {
+                        transform {
+                            translate(600, 25)
+                        }
+                        circle {
+                            cx = 90.px
+                            cy = 80.px
+                            r = 70.px
+                            fill(SvgColor.Hex.RGB(0xcc0000))
+                            filter(imageAtop)
+                        }
+                        text {
+                            x = listOf(80.none)
+                            y = listOf((-5).none)
+                            +"atop"
+                        }
                     }
-                    circle {
-                        cx = 90.px
-                        cy = 80.px
-                        r = 70.px
-                        fill(SvgColor.Hex.RGB(0xcc0000))
-                        filter(imageOver)
+                    g {
+                        transform {
+                            translate(0, 240)
+                        }
+                        circle {
+                            cx = 90.px
+                            cy = 80.px
+                            r = 70.px
+                            fill(SvgColor.Hex.RGB(0xcc0000))
+                            filter(imageXor)
+                        }
+                        text {
+                            x = listOf(80.none)
+                            y = listOf((-5).none)
+                            +"xor"
+                        }
                     }
-                    text {
-                        x = listOf(80.none)
-                        y = listOf((-5).none)
-                        +"over"
+                    g {
+                        transform {
+                            translate(200, 240)
+                        }
+                        circle {
+                            cx = 90.px
+                            cy = 80.px
+                            r = 70.px
+                            fill(SvgColor.Hex.RGB(0xcc0000))
+                            filter(imageArithmetic)
+                        }
+                        text {
+                            x = listOf(70.none)
+                            y = listOf((-5).none)
+                            +"arithmetic"
+                        }
                     }
-                }
-                g {
-                    transform {
-                        translate(200, 25)
-                    }
-                    circle {
-                        cx = 90.px
-                        cy = 80.px
-                        r = 70.px
-                        fill(SvgColor.Hex.RGB(0xcc0000))
-                        filter(imageIn)
-                    }
-                    text {
-                        x = listOf(80.none)
-                        y = listOf((-5).none)
-                        +"in"
-                    }
-                }
-                g {
-                    transform {
-                        translate(400, 25)
-                    }
-                    circle {
-                        cx = 90.px
-                        cy = 80.px
-                        r = 70.px
-                        fill(SvgColor.Hex.RGB(0xcc0000))
-                        filter(imageOut)
-                    }
-                    text {
-                        x = listOf(80.none)
-                        y = listOf((-5).none)
-                        +"out"
-                    }
-                }
-                g {
-                    transform {
-                        translate(600, 25)
-                    }
-                    circle {
-                        cx = 90.px
-                        cy = 80.px
-                        r = 70.px
-                        fill(SvgColor.Hex.RGB(0xcc0000))
-                        filter(imageAtop)
-                    }
-                    text {
-                        x = listOf(80.none)
-                        y = listOf((-5).none)
-                        +"atop"
-                    }
-                }
-                g {
-                    transform {
-                        translate(0, 240)
-                    }
-                    circle {
-                        cx = 90.px
-                        cy = 80.px
-                        r = 70.px
-                        fill(SvgColor.Hex.RGB(0xcc0000))
-                        filter(imageXor)
-                    }
-                    text {
-                        x = listOf(80.none)
-                        y = listOf((-5).none)
-                        +"xor"
-                    }
-                }
-                g {
-                    transform {
-                        translate(200, 240)
-                    }
-                    circle {
-                        cx = 90.px
-                        cy = 80.px
-                        r = 70.px
-                        fill(SvgColor.Hex.RGB(0xcc0000))
-                        filter(imageArithmetic)
-                    }
-                    text {
-                        x = listOf(70.none)
-                        y = listOf((-5).none)
-                        +"arithmetic"
-                    }
-                }
-                g {
-                    transform {
-                        translate(400, 240)
-                    }
-                    circle {
-                        cx = 90.px
-                        cy = 80.px
-                        r = 70.px
-                        fill(SvgColor.Hex.RGB(0xcc0000))
-                        filter(imageLighter)
-                    }
-                    text {
-                        x = listOf(80.none)
-                        y = listOf((-5).none)
-                        +"lighter"
+                    g {
+                        transform {
+                            translate(400, 240)
+                        }
+                        circle {
+                            cx = 90.px
+                            cy = 80.px
+                            r = 70.px
+                            fill(SvgColor.Hex.RGB(0xcc0000))
+                            filter(imageLighter)
+                        }
+                        text {
+                            x = listOf(80.none)
+                            y = listOf((-5).none)
+                            +"lighter"
+                        }
                     }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 }

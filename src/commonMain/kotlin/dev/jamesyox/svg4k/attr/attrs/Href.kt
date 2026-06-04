@@ -79,7 +79,6 @@ public var href: String
         ac["href"] = value
     }
 
-
 /**
  * Convenience method which sets [href] to an id. For example: `#myId`
  */

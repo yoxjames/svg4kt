@@ -55,7 +55,8 @@ import kotlin.time.Duration.Companion.seconds
 class MpathTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="100%"
@@ -104,72 +105,73 @@ class MpathTest {
                     </animateMotion>
                 </path>
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val path1 = SvgId("path1")
-                width = 100.pct
-                height = 100.pct
-                viewBox = ViewBox(0, 0, 500, 300)
-                rect {
-                    x = 1.none
-                    y = 1.none
-                    width = 498.none
-                    height = 298.none
-                    fill = SvgPaint.None
-                    stroke(SvgColor.Blue)
-                    strokeWidth = 2.none
-                }
-                path {
-                    id = path1
-                    d {
-                        M(100, 250)
-                        C(100, 50, 400, 50, 400, 250)
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val path1 = SvgId("path1")
+                    width = 100.pct
+                    height = 100.pct
+                    viewBox = ViewBox(0, 0, 500, 300)
+                    rect {
+                        x = 1.none
+                        y = 1.none
+                        width = 498.none
+                        height = 298.none
+                        fill = SvgPaint.None
+                        stroke(SvgColor.Blue)
+                        strokeWidth = 2.none
                     }
-                    fill = SvgPaint.None
-                    stroke(SvgColor.Blue)
-                    strokeWidth = 7.06.none
-                }
-                circle {
-                    cx = 100.none
-                    cy = 250.none
-                    r = 17.64.none
-                    fill(SvgColor.Blue)
-                }
-                circle {
-                    cx = 250.none
-                    cy = 100.none
-                    r = 17.64.none
-                    fill(SvgColor.Blue)
-                }
-                circle {
-                    cx = 400.none
-                    cy = 250.none
-                    r = 17.64.none
-                    fill(SvgColor.Blue)
-                }
-                path {
-                    d {
-                        M(-25, -12.5)
-                        L(25, -12.5)
-                        L(0, -87.5)
-                        Z
+                    path {
+                        id = path1
+                        d {
+                            M(100, 250)
+                            C(100, 50, 400, 50, 400, 250)
+                        }
+                        fill = SvgPaint.None
+                        stroke(SvgColor.Blue)
+                        strokeWidth = 7.06.none
                     }
-                    fill(SvgColor.Yellow)
-                    stroke(SvgColor.Red)
-                    strokeWidth = 7.06.none
-                    animateMotion {
-                        dur = Dur.ClockValue(6.seconds)
-                        repeatCount = RepeatCount.Indefinite
-                        rotate = Rotate.Auto
-                        mpath {
-                            href(path1)
+                    circle {
+                        cx = 100.none
+                        cy = 250.none
+                        r = 17.64.none
+                        fill(SvgColor.Blue)
+                    }
+                    circle {
+                        cx = 250.none
+                        cy = 100.none
+                        r = 17.64.none
+                        fill(SvgColor.Blue)
+                    }
+                    circle {
+                        cx = 400.none
+                        cy = 250.none
+                        r = 17.64.none
+                        fill(SvgColor.Blue)
+                    }
+                    path {
+                        d {
+                            M(-25, -12.5)
+                            L(25, -12.5)
+                            L(0, -87.5)
+                            Z
+                        }
+                        fill(SvgColor.Yellow)
+                        stroke(SvgColor.Red)
+                        strokeWidth = 7.06.none
+                        animateMotion {
+                            dur = Dur.ClockValue(6.seconds)
+                            repeatCount = RepeatCount.Indefinite
+                            rotate = Rotate.Auto
+                            mpath {
+                                href(path1)
+                            }
                         }
                     }
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }

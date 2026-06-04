@@ -50,4 +50,3 @@ context(
 public fun offset(value: Number) {
     ac["offset"] = value.svgString
 }
-

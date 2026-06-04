@@ -54,7 +54,7 @@ public sealed interface AttributeContainer {
 
     public interface ClipPathUnits : AttributeContainer
 
-    public interface Color  : AttributeContainer// Not currently supported
+    public interface Color : AttributeContainer // Not currently supported
 
     public interface ColorInterpolation : AttributeContainer
 
@@ -70,7 +70,7 @@ public sealed interface AttributeContainer {
 
     public interface D : AttributeContainer
 
-    public interface CustomData : AttributeContainer// Not currently supported
+    public interface CustomData : AttributeContainer // Not currently supported
 
     public interface Decoding : AttributeContainer
 
@@ -399,6 +399,7 @@ public sealed interface AttributeContainer {
     public interface X2 : AttributeContainer
 
     public interface XChannelSelector : AttributeContainer
+
     public interface Xmlns : AttributeContainer
 
     public interface Y : AttributeContainer

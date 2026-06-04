@@ -49,9 +49,10 @@ public fun A(
     y: Number,
 ) {
     builder.add(
-        PathCommand.A(rx = rx, ry = ry, angle = angle, largeArcFlag = largeArcFlag, sweepFlag = sweepFlag, x = x, y = y)
+        PathCommand.A(rx = rx, ry = ry, angle = angle, largeArcFlag = largeArcFlag, sweepFlag = sweepFlag, x = x, y = y),
     )
 }
+
 context(_: PathBuilder)
 public fun EllipticalArcCurve(
     rx: Number,
@@ -72,10 +73,11 @@ public fun C(
     x2: Number,
     y2: Number,
     x: Number,
-    y: Number
+    y: Number,
 ) {
     builder.add(PathCommand.C(x1 = x1, y1 = y1, x2 = x2, y2 = y2, x = x, y = y))
 }
+
 context(_: PathBuilder)
 public fun CubicCurve(
     x1: Number,
@@ -83,7 +85,7 @@ public fun CubicCurve(
     x2: Number,
     y2: Number,
     x: Number,
-    y: Number
+    y: Number,
 ) {
     C(x1 = x1, y1 = y1, x2 = x2, y2 = y2, x = x, y = y)
 }
@@ -95,10 +97,11 @@ public fun c(
     dx2: Number,
     dy2: Number,
     dx: Number,
-    dy: Number
+    dy: Number,
 ) {
     builder.add(PathCommand._c(dx1 = dx1, dy1 = dy1, dx2 = dx2, dy2 = dy2, dx = dx, dy = dy))
 }
+
 context(_: PathBuilder)
 public fun CubicCurveRelative(
     dx1: Number,
@@ -106,7 +109,7 @@ public fun CubicCurveRelative(
     dx2: Number,
     dy2: Number,
     dx: Number,
-    dy: Number
+    dy: Number,
 ) {
     c(dx1 = dx1, dy1 = dy1, dx2 = dx2, dy2 = dy2, dx = dx, dy = dy)
 }
@@ -115,6 +118,7 @@ context(builder: PathBuilder)
 public fun H(x: Number) {
     builder.add(PathCommand.H(x = x))
 }
+
 context(_: PathBuilder)
 public fun HorizontalLineTo(x: Number) {
     H(x = x)
@@ -124,6 +128,7 @@ context(builder: PathBuilder)
 public fun h(dx: Number) {
     builder.add(PathCommand._h(dx = dx))
 }
+
 context(_: PathBuilder)
 public fun HorizontalLine(dx: Number) {
     h(dx = dx)
@@ -133,6 +138,7 @@ context(builder: PathBuilder)
 public fun V(y: Number) {
     builder.add(PathCommand.V(y = y))
 }
+
 context(_: PathBuilder)
 public fun VerticalLine(y: Number) {
     V(y = y)
@@ -142,35 +148,57 @@ context(builder: PathBuilder)
 public fun v(dy: Number) {
     builder.add(PathCommand._v(dy = dy))
 }
+
 context(_: PathBuilder)
 public fun VerticalLineTo(dy: Number) {
     v(dy = dy)
 }
 
 context(builder: PathBuilder)
-public fun L(x: Number, y: Number) {
+public fun L(
+    x: Number,
+    y: Number,
+) {
     builder.add(PathCommand.L(x = x, y = y))
 }
+
 context(_: PathBuilder)
-public fun LineTo(x: Number, y: Number) {
+public fun LineTo(
+    x: Number,
+    y: Number,
+) {
     L(x = x, y = y)
 }
 
 context(builder: PathBuilder)
-public fun M(x: Number, y: Number) {
+public fun M(
+    x: Number,
+    y: Number,
+) {
     builder.add(PathCommand.M(x = x, y = y))
 }
+
 context(_: PathBuilder)
-public fun MoveTo(x: Number, y: Number) {
+public fun MoveTo(
+    x: Number,
+    y: Number,
+) {
     M(x = x, y = y)
 }
 
 context(builder: PathBuilder)
-public fun m(dx: Number, dy: Number) {
+public fun m(
+    dx: Number,
+    dy: Number,
+) {
     builder.add(PathCommand._m(dx = dx, dy = dy))
 }
+
 context(_: PathBuilder)
-public fun Move(x: Number, y: Number) {
+public fun Move(
+    x: Number,
+    y: Number,
+) {
     m(dx = x, dy = y)
 }
 
@@ -179,22 +207,26 @@ public fun Q(
     x1: Number,
     x2: Number,
     x: Number,
-    y: Number
+    y: Number,
 ) {
     builder.add(PathCommand.Q(x1 = x1, x2 = x2, x = x, y = y))
 }
+
 context(_: PathBuilder)
 public fun QuadraticBezierCurve(
     x1: Number,
     x2: Number,
     x: Number,
-    y: Number
+    y: Number,
 ) {
     Q(x1 = x1, x2 = x2, x = x, y = y)
 }
 
 context(builder: PathBuilder)
-public val Z: Unit get() { builder.add(PathCommand.Z) }
+public val Z: Unit get() {
+    builder.add(PathCommand.Z)
+}
 context(_: PathBuilder)
-public val ClosePath: Unit get() { Z }
-
+public val ClosePath: Unit get() {
+    Z
+}

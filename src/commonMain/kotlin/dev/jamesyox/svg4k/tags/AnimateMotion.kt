@@ -71,4 +71,3 @@ public fun <T> animateMotion(content: context(AttributeConsumer, @SvgTagDSL Anim
     }
     return consumeTag(tag = AnimateMotion, content = content)
 }
-

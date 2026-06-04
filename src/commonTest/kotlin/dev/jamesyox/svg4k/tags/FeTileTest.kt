@@ -38,7 +38,8 @@ import kotlin.test.assertEquals
 class FeTileTest {
     @Test
     fun mozillaTest() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="200"
@@ -70,43 +71,44 @@ class FeTileTest {
                     height="80%"
                     filter="url(#tile)" />
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val tile = SvgId("tile")
-                width = 200.none
-                height = 200.none
-                title {
-                    +"Tiling an MDN logo with the Mozilla mascot's head that is on the logo"
-                }
-                defs {
-                    filter {
-                        id = tile
-                        x = 0.none
-                        y = 0.none
-                        width = 100.pct
-                        height = 100.pct
-                        feTile {
-                            `in` = In.SourceGraphic
-                            x = 50.none
-                            y = 50.none
-                            width = 100.none
-                            height = 100.none
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val tile = SvgId("tile")
+                    width = 200.none
+                    height = 200.none
+                    title {
+                        +"Tiling an MDN logo with the Mozilla mascot's head that is on the logo"
+                    }
+                    defs {
+                        filter {
+                            id = tile
+                            x = 0.none
+                            y = 0.none
+                            width = 100.pct
+                            height = 100.pct
+                            feTile {
+                                `in` = In.SourceGraphic
+                                x = 50.none
+                                y = 50.none
+                                width = 100.none
+                                height = 100.none
+                            }
+                            feTile { }
                         }
-                        feTile {  }
+                    }
+                    image {
+                        href = "mdn_logo_only_color.png"
+                        x = 10.pct
+                        y = 10.pct
+                        width = 80.pct
+                        height = 80.pct
+                        filter(tile)
                     }
                 }
-                image {
-                    href = "mdn_logo_only_color.png"
-                    x = 10.pct
-                    y = 10.pct
-                    width = 80.pct
-                    height = 80.pct
-                    filter(tile)
-                }
             }
-        }
         assertEquals(expected, actual)
     }
 }

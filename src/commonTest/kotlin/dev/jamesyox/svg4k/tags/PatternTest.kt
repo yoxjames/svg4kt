@@ -42,7 +42,8 @@ import kotlin.test.assertEquals
 class PatternTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 230 100">
@@ -69,48 +70,50 @@ class PatternTest {
                     stroke-width="20"
                     stroke="url(#star)" />
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val star = SvgId("star")
-                viewBox = ViewBox(0, 0, 230, 100)
-                defs {
-                    pattern {
-                        id = star
-                        viewBox = ViewBox(0, 0, 10, 10)
-                        width = 10.pct
-                        height = 10.pct
-                        polygon {
-                            points = listOf(
-                                Point(0, 0),
-                                Point(2, 5),
-                                Point(0, 10),
-                                Point(5, 8),
-                                Point(10, 10),
-                                Point(8, 5),
-                                Point(10, 0),
-                                Point(5, 2)
-                            )
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val star = SvgId("star")
+                    viewBox = ViewBox(0, 0, 230, 100)
+                    defs {
+                        pattern {
+                            id = star
+                            viewBox = ViewBox(0, 0, 10, 10)
+                            width = 10.pct
+                            height = 10.pct
+                            polygon {
+                                points =
+                                    listOf(
+                                        Point(0, 0),
+                                        Point(2, 5),
+                                        Point(0, 10),
+                                        Point(5, 8),
+                                        Point(10, 10),
+                                        Point(8, 5),
+                                        Point(10, 0),
+                                        Point(5, 2),
+                                    )
+                            }
                         }
                     }
-                }
-                circle {
-                    cx = 50.none
-                    cy = 50.none
-                    r = 50.none
-                    fill(star)
-                }
-                circle {
-                    cx = 180.none
-                    cy = 50.none
-                    r = 40.none
-                    fill = SvgPaint.None
-                    strokeWidth = 20.none
-                    stroke(star)
+                    circle {
+                        cx = 50.none
+                        cy = 50.none
+                        r = 50.none
+                        fill(star)
+                    }
+                    circle {
+                        cx = 180.none
+                        cy = 50.none
+                        r = 40.none
+                        fill = SvgPaint.None
+                        strokeWidth = 20.none
+                        stroke(star)
+                    }
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }

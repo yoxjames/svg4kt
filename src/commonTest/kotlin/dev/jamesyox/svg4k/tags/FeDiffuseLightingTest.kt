@@ -59,7 +59,8 @@ import kotlin.test.assertEquals
 class FeDiffuseLightingTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="440"
@@ -175,137 +176,138 @@ class FeDiffuseLightingTest {
                     fill="green"
                     filter="url(#lightMe3)" />
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                width = 440.none
-                height = 140.none
-                text {
-                    textAnchor = TextAnchor.Middle
-                    x = listOf(60.none)
-                    y = listOf(22.none)
-                    +"No Light"
-                }
-                circle {
-                    cx = 60.none
-                    cy = 80.none
-                    r = 50.none
-                    fill(SvgColor.Green)
-                }
-                text {
-                    textAnchor = TextAnchor.Middle
-                    x = listOf(170.none)
-                    y = listOf(22.none)
-                    +"fePointLight"
-                }
-                val lightMe1 = SvgId("lightMe1")
-                filter {
-                    id = lightMe1
-                    feDiffuseLighting {
-                        `in` = In.SourceGraphic
-                        result = "light"
-                        lightingColor = SvgColor.White
-                        fePointLight {
-                            x = 150
-                            y = 60
-                            z = 20
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    width = 440.none
+                    height = 140.none
+                    text {
+                        textAnchor = TextAnchor.Middle
+                        x = listOf(60.none)
+                        y = listOf(22.none)
+                        +"No Light"
+                    }
+                    circle {
+                        cx = 60.none
+                        cy = 80.none
+                        r = 50.none
+                        fill(SvgColor.Green)
+                    }
+                    text {
+                        textAnchor = TextAnchor.Middle
+                        x = listOf(170.none)
+                        y = listOf(22.none)
+                        +"fePointLight"
+                    }
+                    val lightMe1 = SvgId("lightMe1")
+                    filter {
+                        id = lightMe1
+                        feDiffuseLighting {
+                            `in` = In.SourceGraphic
+                            result = "light"
+                            lightingColor = SvgColor.White
+                            fePointLight {
+                                x = 150
+                                y = 60
+                                z = 20
+                            }
+                        }
+                        feComposite {
+                            `in` = In.SourceGraphic
+                            in2 = In.Primitive("light")
+                            operator = CompositeOperator.Arithmetic
+                            k1 = 1
+                            k2 = 0
+                            k3 = 0
+                            k4 = 0
                         }
                     }
-                    feComposite {
-                        `in` = In.SourceGraphic
-                        in2 = In.Primitive("light")
-                        operator = CompositeOperator.Arithmetic
-                        k1 = 1
-                        k2 = 0
-                        k3 = 0
-                        k4 = 0
+                    circle {
+                        cx = 170.none
+                        cy = 80.none
+                        r = 50.none
+                        fill(SvgColor.Green)
+                        filter(lightMe1)
                     }
-                }
-                circle {
-                    cx = 170.none
-                    cy = 80.none
-                    r = 50.none
-                    fill(SvgColor.Green)
-                    filter(lightMe1)
-                }
-                text {
-                    textAnchor = TextAnchor.Middle
-                    x = listOf(280.none)
-                    y = listOf(22.none)
-                    +"feDistantLight"
-                }
-                val lightMe2 = SvgId("lightMe2")
-                filter {
-                    id = lightMe2
-                    feDiffuseLighting {
-                        `in` = In.SourceGraphic
-                        result = "light"
-                        lightingColor = SvgColor.White
-                        feDistantLight {
-                            azimuth = 240
-                            elevation = 20
+                    text {
+                        textAnchor = TextAnchor.Middle
+                        x = listOf(280.none)
+                        y = listOf(22.none)
+                        +"feDistantLight"
+                    }
+                    val lightMe2 = SvgId("lightMe2")
+                    filter {
+                        id = lightMe2
+                        feDiffuseLighting {
+                            `in` = In.SourceGraphic
+                            result = "light"
+                            lightingColor = SvgColor.White
+                            feDistantLight {
+                                azimuth = 240
+                                elevation = 20
+                            }
+                        }
+                        feComposite {
+                            `in` = In.SourceGraphic
+                            in2 = In.Primitive("light")
+                            operator = CompositeOperator.Arithmetic
+                            k1 = 1
+                            k2 = 0
+                            k3 = 0
+                            k4 = 0
                         }
                     }
-                    feComposite {
-                        `in` = In.SourceGraphic
-                        in2 = In.Primitive("light")
-                        operator = CompositeOperator.Arithmetic
-                        k1 = 1
-                        k2 = 0
-                        k3 = 0
-                        k4 = 0
+                    circle {
+                        cx = 280.none
+                        cy = 80.none
+                        r = 50.none
+                        fill(SvgColor.Green)
+                        filter(lightMe2)
                     }
-                }
-                circle {
-                    cx = 280.none
-                    cy = 80.none
-                    r = 50.none
-                    fill(SvgColor.Green)
-                    filter(lightMe2)
-                }
-                text {
-                    textAnchor = TextAnchor.Middle
-                    x = listOf(390.none)
-                    y = listOf(22.none)
-                    +"feSpotlight"
-                }
-                val lightMe3 = SvgId("lightMe3")
-                filter {
-                    id = lightMe3
-                    feDiffuseLighting {
-                        `in` = In.SourceGraphic
-                        result = "light"
-                        lightingColor = SvgColor.White
-                        feSpotLight {
-                            x = 360
-                            y = 5
-                            z = 30
-                            limitingConeAngle = 20
-                            pointsAtX = 390
-                            pointsAtY = 80
-                            pointsAtZ = 0
+                    text {
+                        textAnchor = TextAnchor.Middle
+                        x = listOf(390.none)
+                        y = listOf(22.none)
+                        +"feSpotlight"
+                    }
+                    val lightMe3 = SvgId("lightMe3")
+                    filter {
+                        id = lightMe3
+                        feDiffuseLighting {
+                            `in` = In.SourceGraphic
+                            result = "light"
+                            lightingColor = SvgColor.White
+                            feSpotLight {
+                                x = 360
+                                y = 5
+                                z = 30
+                                limitingConeAngle = 20
+                                pointsAtX = 390
+                                pointsAtY = 80
+                                pointsAtZ = 0
+                            }
+                        }
+                        feComposite {
+                            `in` = In.SourceGraphic
+                            in2 = In.Primitive("light")
+                            operator = CompositeOperator.Arithmetic
+                            k1 = 1
+                            k2 = 0
+                            k3 = 0
+                            k4 = 0
                         }
                     }
-                    feComposite {
-                        `in` = In.SourceGraphic
-                        in2 = In.Primitive("light")
-                        operator = CompositeOperator.Arithmetic
-                        k1 = 1
-                        k2 = 0
-                        k3 = 0
-                        k4 = 0
+                    circle {
+                        cx = 390.none
+                        cy = 80.none
+                        r = 50.none
+                        fill(SvgColor.Green)
+                        filter(lightMe3)
                     }
-                }
-                circle {
-                    cx = 390.none
-                    cy = 80.none
-                    r = 50.none
-                    fill(SvgColor.Green)
-                    filter(lightMe3)
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }

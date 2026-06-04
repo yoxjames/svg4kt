@@ -22,14 +22,14 @@ import dev.jamesyox.svg4k.attr.SvgAttributeType
 internal sealed interface TransformFunction : SvgAttributeType {
     class Translate(
         x: Number,
-        y: Number? = null
+        y: Number? = null,
     ) : TransformFunction {
         override val svgString: String = "translate($x${param(y)})"
     }
 
     class Scale(
         x: Number,
-        y: Number? = null
+        y: Number? = null,
     ) : TransformFunction {
         override val svgString: String = "scale($x${param(y)})"
     }

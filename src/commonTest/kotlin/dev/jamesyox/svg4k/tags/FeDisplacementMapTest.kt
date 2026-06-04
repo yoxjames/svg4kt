@@ -50,7 +50,8 @@ import kotlin.test.assertEquals
 class FeDisplacementMapTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="200"
@@ -76,38 +77,39 @@ class FeDisplacementMapTest {
                     r="100"
                     filter="url(#displacementFilter)" />
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val displacementFilter = SvgId("displacementFilter")
-                width = 200.none
-                height = 200.none
-                viewBox = ViewBox(0, 0, 220, 220)
-                filter {
-                    id = displacementFilter
-                    feTurbulence {
-                        type = FeTurbulenceType.Turbulence
-                        baseFrequency = NumberOptionalNumber(0.05, null)
-                        numOctaves = 2
-                        result = "turbulence"
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val displacementFilter = SvgId("displacementFilter")
+                    width = 200.none
+                    height = 200.none
+                    viewBox = ViewBox(0, 0, 220, 220)
+                    filter {
+                        id = displacementFilter
+                        feTurbulence {
+                            type = FeTurbulenceType.Turbulence
+                            baseFrequency = NumberOptionalNumber(0.05, null)
+                            numOctaves = 2
+                            result = "turbulence"
+                        }
+                        feDisplacementMap {
+                            in2 = In.Primitive("turbulence")
+                            `in` = In.SourceGraphic
+                            scale = 50
+                            xChannelSelector = XChannelSelector.R
+                            yChannelSelector = YChannelSelector.G
+                        }
                     }
-                    feDisplacementMap {
-                        in2 = In.Primitive("turbulence")
-                        `in` = In.SourceGraphic
-                        scale = 50
-                        xChannelSelector = XChannelSelector.R
-                        yChannelSelector = YChannelSelector.G
+                    circle {
+                        cx = 100.none
+                        cy = 100.none
+                        r = 100.none
+                        filter(displacementFilter)
                     }
-                }
-                circle {
-                    cx = 100.none
-                    cy = 100.none
-                    r = 100.none
-                    filter(displacementFilter)
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }

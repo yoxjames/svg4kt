@@ -42,7 +42,8 @@ import kotlin.time.Duration.Companion.seconds
 class AnimateMotionTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 200 100">
@@ -59,37 +60,38 @@ class AnimateMotionTest {
                         path="M 20 50 C 20 -50 180 150 180 50 C 180 -50 20 150 20 50 Z" />
                 </circle>
             </svg>
-        """.trimIndent()
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                viewBox = ViewBox(0, 0, 200, 100)
-                path {
-                    fill = SvgPaint.None
-                    stroke(SvgColor.LightGrey)
-                    stroke = SvgPaint.Color(SvgColor.LightGrey)
-                    d {
-                        M(20, 50)
-                        C(20, -50, 180, 150, 180, 50)
-                        C(180, -50, 20, 150, 20, 50)
-                        Z
-                    }
-                }
-                circle {
-                    r = 5.none
-                    fill(SvgColor.Red)
-                    animateMotion {
-                        dur = Dur.ClockValue(10.seconds)
-                        repeatCount = RepeatCount.Indefinite
-                        path {
+            """.trimIndent()
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    viewBox = ViewBox(0, 0, 200, 100)
+                    path {
+                        fill = SvgPaint.None
+                        stroke(SvgColor.LightGrey)
+                        stroke = SvgPaint.Color(SvgColor.LightGrey)
+                        d {
                             M(20, 50)
                             C(20, -50, 180, 150, 180, 50)
                             C(180, -50, 20, 150, 20, 50)
                             Z
                         }
                     }
+                    circle {
+                        r = 5.none
+                        fill(SvgColor.Red)
+                        animateMotion {
+                            dur = Dur.ClockValue(10.seconds)
+                            repeatCount = RepeatCount.Indefinite
+                            path {
+                                M(20, 50)
+                                C(20, -50, 180, 150, 180, 50)
+                                C(180, -50, 20, 150, 20, 50)
+                                Z
+                            }
+                        }
+                    }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 }

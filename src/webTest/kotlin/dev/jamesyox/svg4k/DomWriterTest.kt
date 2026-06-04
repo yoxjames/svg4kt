@@ -35,20 +35,22 @@ class DomWriterTest {
     fun testDom() {
         try {
             document
-        } catch(_: Throwable) {
+        } catch (_: Throwable) {
             return
         }
         val node = document.createElement("div")
         val svg: SVGElement
         val rect: SVGElement
         node.appendSvg {
-            svg = svg {
-                viewBox = ViewBox(0, 0, 100, 100)
-                rect = rect {
-                    width = 100.none
-                    height = 100.none
+            svg =
+                svg {
+                    viewBox = ViewBox(0, 0, 100, 100)
+                    rect =
+                        rect {
+                            width = 100.none
+                            height = 100.none
+                        }
                 }
-            }
         }
 
         assertTrue(node.contains(svg))

@@ -43,7 +43,8 @@ import kotlin.test.assertEquals
 class FeMergeTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="200"
@@ -77,48 +78,49 @@ class FeMergeTest {
                     fill="green"
                     filter="url(#feOffset)" />
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val feOffset = SvgId("feOffset")
-                width = 200.none
-                height = 200.none
-                filter {
-                    id = feOffset
-                    x = (-40).none
-                    y = (-20).none
-                    width = 100.none
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val feOffset = SvgId("feOffset")
+                    width = 200.none
                     height = 200.none
-                    feOffset {
-                        `in` = In.SourceGraphic
-                        dx = 60
-                        dy = 60
-                    }
-                    feGaussianBlur {
-                        stdDeviation = NumberOptionalNumber(5, null)
-                        result = "blur2"
-                    }
-                    feMerge {
-                        feMergeNode {
-                            `in` = In.Primitive("blur2")
-                        }
-                        feMergeNode {
+                    filter {
+                        id = feOffset
+                        x = (-40).none
+                        y = (-20).none
+                        width = 100.none
+                        height = 200.none
+                        feOffset {
                             `in` = In.SourceGraphic
+                            dx = 60
+                            dy = 60
+                        }
+                        feGaussianBlur {
+                            stdDeviation = NumberOptionalNumber(5, null)
+                            result = "blur2"
+                        }
+                        feMerge {
+                            feMergeNode {
+                                `in` = In.Primitive("blur2")
+                            }
+                            feMergeNode {
+                                `in` = In.SourceGraphic
+                            }
                         }
                     }
-                }
-                rect {
-                    x = 40.none
-                    y = 40.none
-                    width = 100.none
-                    height = 100.none
-                    stroke(SvgColor.Black)
-                    fill(SvgColor.Green)
-                    filter(feOffset)
+                    rect {
+                        x = 40.none
+                        y = 40.none
+                        width = 100.none
+                        height = 100.none
+                        stroke(SvgColor.Black)
+                        fill(SvgColor.Green)
+                        filter(feOffset)
+                    }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 }

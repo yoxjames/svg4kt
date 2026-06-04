@@ -43,7 +43,10 @@ internal fun transformBuilder(block: context(TransformBuilder) () -> Unit): List
  * it is assumed to be 0.
  */
 context(builder: TransformBuilder)
-public fun translate(x: Number, y: Number) {
+public fun translate(
+    x: Number,
+    y: Number,
+) {
     builder.add(TransformFunction.Translate(x = x, y = y))
 }
 
@@ -52,7 +55,10 @@ public fun translate(x: Number, y: Number) {
  * it is assumed to be equal to [x].
  */
 context(builder: TransformBuilder)
-public fun scale(x: Number, y: Number? = null) {
+public fun scale(
+    x: Number,
+    y: Number? = null,
+) {
     builder.add(TransformFunction.Scale(x = x, y = y))
 }
 
@@ -62,7 +68,11 @@ public fun scale(x: Number, y: Number? = null) {
  * coordinate system. If optional parameters [x] and [y] are supplied, the rotation is about the point `(x, y)`.
  */
 context(builder: TransformBuilder)
-public fun rotate(a: Number, x: Number? = null, y: Number? = null) {
+public fun rotate(
+    a: Number,
+    x: Number? = null,
+    y: Number? = null,
+) {
     builder.add(TransformFunction.Rotate(a = a, x = x, y = y))
 }
 
@@ -74,7 +84,6 @@ context(builder: TransformBuilder)
 public fun skewX(a: Number) {
     builder.add(TransformFunction.SkewX(a = a))
 }
-
 
 /**
  * The [skewY] transform function specifies a skew transformation along the y-axis

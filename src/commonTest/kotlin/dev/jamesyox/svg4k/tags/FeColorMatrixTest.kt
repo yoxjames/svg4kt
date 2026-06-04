@@ -57,7 +57,8 @@ import kotlin.test.assertEquals
 class FeColorMatrixTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="100%"
@@ -174,157 +175,159 @@ class FeColorMatrixTest {
                     y="400">
                     luminanceToAlpha
                 </text>
-            </svg>""".trimIndent()
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val circles = SvgId("circles")
-                width = 100.pct
-                height = 100.pct
-                viewBox = ViewBox(0, 0, 150, 500)
-                preserveAspectRatio = PreserveAspectRatio(AlignmentValue.XMidYMid, ScaleValue.Meet)
-                unsafe {
-                    attr["xmlns:xlink"] = "http://www.w3.org/1999/xlink"
-                }
-                defs {
-                    g {
-                        id = circles
-                        circle {
-                            cx = 30.none
-                            cy = 30.none
-                            r = 20.none
-                            fill(SvgColor.Blue)
-                            fillOpacity(0.5f)
+            </svg>
+            """.trimIndent()
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val circles = SvgId("circles")
+                    width = 100.pct
+                    height = 100.pct
+                    viewBox = ViewBox(0, 0, 150, 500)
+                    preserveAspectRatio = PreserveAspectRatio(AlignmentValue.XMidYMid, ScaleValue.Meet)
+                    unsafe {
+                        attr["xmlns:xlink"] = "http://www.w3.org/1999/xlink"
+                    }
+                    defs {
+                        g {
+                            id = circles
+                            circle {
+                                cx = 30.none
+                                cy = 30.none
+                                r = 20.none
+                                fill(SvgColor.Blue)
+                                fillOpacity(0.5f)
+                            }
+                            circle {
+                                cx = 20.none
+                                cy = 50.none
+                                r = 20.none
+                                fill(SvgColor.Green)
+                                fillOpacity(0.5f)
+                            }
+                            circle {
+                                cx = 40.none
+                                cy = 50.none
+                                r = 20.none
+                                fill(SvgColor.Red)
+                                fillOpacity(0.5f)
+                            }
                         }
-                        circle {
-                            cx = 20.none
-                            cy = 50.none
-                            r = 20.none
-                            fill(SvgColor.Green)
-                            fillOpacity(0.5f)
+                    }
+                    use {
+                        href(circles)
+                    }
+                    text {
+                        x = listOf(70.none)
+                        y = listOf(50.none)
+                        +"Reference"
+                    }
+                    val colorMeTheSame = SvgId("colorMeTheSame")
+                    filter {
+                        id = colorMeTheSame
+                        feColorMatrix {
+                            `in` = In.SourceGraphic
+                            type = FeColorMatrixType.Matrix
+                            values = listOf(1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0)
                         }
-                        circle {
-                            cx = 40.none
-                            cy = 50.none
-                            r = 20.none
-                            fill(SvgColor.Red)
-                            fillOpacity(0.5f)
+                    }
+                    use {
+                        href(circles)
+                        transform {
+                            translate(0, 70)
+                        }
+                        filter(colorMeTheSame)
+                    }
+                    text {
+                        x = listOf(70.none)
+                        y = listOf(120.none)
+                        +"Identity matrix"
+                    }
+                    val colorMeGreen = SvgId("colorMeGreen")
+                    filter {
+                        id = colorMeGreen
+                        feColorMatrix {
+                            `in` = In.SourceGraphic
+                            type = FeColorMatrixType.Matrix
+                            values = listOf(0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0)
                         }
                     }
-                }
-                use {
-                    href(circles)
-                }
-                text {
-                    x = listOf(70.none)
-                    y = listOf(50.none)
-                    +"Reference"
-                }
-                val colorMeTheSame = SvgId("colorMeTheSame")
-                filter {
-                    id = colorMeTheSame
-                    feColorMatrix {
-                        `in` = In.SourceGraphic
-                        type = FeColorMatrixType.Matrix
-                        values = listOf(1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0)
+                    use {
+                        href(circles)
+                        transform {
+                            translate(0, 140)
+                        }
+                        filter(colorMeGreen)
                     }
-                }
-                use {
-                    href(circles)
-                    transform {
-                        translate(0, 70)
+                    text {
+                        x = listOf(70.none)
+                        y = listOf(190.none)
+                        +"rgbToGreen"
                     }
-                    filter(colorMeTheSame)
-                }
-                text {
-                    x = listOf(70.none)
-                    y = listOf(120.none)
-                    +"Identity matrix"
-                }
-                val colorMeGreen = SvgId("colorMeGreen")
-                filter {
-                    id = colorMeGreen
-                    feColorMatrix {
-                        `in` = In.SourceGraphic
-                        type = FeColorMatrixType.Matrix
-                        values = listOf(0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0)
+                    val colorMeSaturate = SvgId("colorMeSaturate")
+                    filter {
+                        id = colorMeSaturate
+                        feColorMatrix {
+                            `in` = In.SourceGraphic
+                            type = FeColorMatrixType.Saturate
+                            values = listOf(0.2)
+                        }
                     }
-                }
-                use {
-                    href(circles)
-                    transform {
-                        translate(0, 140)
+                    use {
+                        href(circles)
+                        transform {
+                            translate(0, 210)
+                        }
+                        filter(colorMeSaturate)
                     }
-                    filter(colorMeGreen)
-                }
-                text {
-                    x = listOf(70.none)
-                    y = listOf(190.none)
-                    +"rgbToGreen"
-                }
-                val colorMeSaturate = SvgId("colorMeSaturate")
-                filter {
-                    id = colorMeSaturate
-                    feColorMatrix {
-                        `in` = In.SourceGraphic
-                        type = FeColorMatrixType.Saturate
-                        values = listOf(0.2)
+                    text {
+                        x = listOf(70.none)
+                        y = listOf(260.none)
+                        +"saturate"
                     }
-                }
-                use {
-                    href(circles)
-                    transform {
-                        translate(0, 210)
+                    val colorMeHueRotate = SvgId("colorMeHueRotate")
+                    filter {
+                        id = colorMeHueRotate
+                        feColorMatrix {
+                            `in` = In.SourceGraphic
+                            type = FeColorMatrixType.HueRotate
+                            values = listOf(180)
+                        }
                     }
-                    filter(colorMeSaturate)
-                }
-                text {
-                    x = listOf(70.none)
-                    y = listOf(260.none)
-                    +"saturate"
-                }
-                val colorMeHueRotate = SvgId("colorMeHueRotate")
-                filter {
-                    id = colorMeHueRotate
-                    feColorMatrix {
-                        `in` = In.SourceGraphic
-                        type = FeColorMatrixType.HueRotate
-                        values = listOf(180)
+                    use {
+                        href(circles)
+                        transform {
+                            translate(0, 280)
+                        }
+                        filter(colorMeHueRotate)
                     }
-                }
-                use {
-                    href(circles)
-                    transform {
-                        translate(0, 280)
+                    text {
+                        x = listOf(70.none)
+                        y = listOf(330.none)
+                        +"hueRotate"
                     }
-                    filter(colorMeHueRotate)
-                }
-                text {
-                    x = listOf(70.none)
-                    y = listOf(330.none)
-                    +"hueRotate"
-                }
-                val colorMeLTA = SvgId("colorMeLTA")
-                filter {
-                    id = colorMeLTA
-                    feColorMatrix {
-                        `in` = In.SourceGraphic
-                        type = FeColorMatrixType.LuminanceToAlpha
+                    val colorMeLTA = SvgId("colorMeLTA")
+                    filter {
+                        id = colorMeLTA
+                        feColorMatrix {
+                            `in` = In.SourceGraphic
+                            type = FeColorMatrixType.LuminanceToAlpha
+                        }
                     }
-                }
-                use {
-                    href(circles)
-                    transform {
-                        translate(0, 350)
+                    use {
+                        href(circles)
+                        transform {
+                            translate(0, 350)
+                        }
+                        filter(colorMeLTA)
                     }
-                    filter(colorMeLTA)
-                }
-                text {
-                    x = listOf(70.none)
-                    y = listOf(400.none)
-                    +"luminanceToAlpha"
+                    text {
+                        x = listOf(70.none)
+                        y = listOf(400.none)
+                        +"luminanceToAlpha"
+                    }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 }

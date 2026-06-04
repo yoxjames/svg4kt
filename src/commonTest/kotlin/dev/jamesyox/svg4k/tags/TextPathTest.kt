@@ -37,7 +37,8 @@ import kotlin.test.assertEquals
 class TextPathTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 100 100">
@@ -53,33 +54,34 @@ class TextPathTest {
                     </textPath>
                 </text>
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val myPath = SvgId("myPath")
-                viewBox = ViewBox(0, 0, 100, 100)
-                path {
-                    id = myPath
-                    fill = SvgPaint.None
-                    stroke(SvgColor.Red)
-                    d {
-                        M(10, 90)
-                        Q(90, 90, 90, 45)
-                        Q(90, 10, 50, 10)
-                        Q(10, 10, 10, 40)
-                        Q(10, 70, 45, 70)
-                        Q(70, 70, 75, 50)
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val myPath = SvgId("myPath")
+                    viewBox = ViewBox(0, 0, 100, 100)
+                    path {
+                        id = myPath
+                        fill = SvgPaint.None
+                        stroke(SvgColor.Red)
+                        d {
+                            M(10, 90)
+                            Q(90, 90, 90, 45)
+                            Q(90, 10, 50, 10)
+                            Q(10, 10, 10, 40)
+                            Q(10, 70, 45, 70)
+                            Q(70, 70, 75, 50)
+                        }
                     }
-                }
-                text {
-                    textPath {
-                        href = myPath
-                        +"Quick brown fox jumps over the lazy dog."
+                    text {
+                        textPath {
+                            href = myPath
+                            +"Quick brown fox jumps over the lazy dog."
+                        }
                     }
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }

@@ -175,10 +175,12 @@ ktlint {
 }
 
 tasks.register("allDetekt") {
+    description = "Run detekt across all source sets."
     allprojects {
         this@register.dependsOn(tasks.withType<Detekt>())
     }
 }
+
 fun String.isNonStable(): Boolean {
     val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { uppercase().contains(it) }
     val regex = "^[0-9,.v-]+(-r)?$".toRegex()

@@ -42,7 +42,8 @@ import kotlin.test.assertEquals
 class ClipPathTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 100 100">
@@ -61,39 +62,40 @@ class ClipPathTest {
                     href="#heart"
                     fill="red" />
             </svg>
-        """.trimIndent()
-        val actual = svgString(isPrettyPrint = true) {
-            val myClip = SvgId("myClip")
-            val heart = SvgId("heart")
-            svg {
-                viewBox = ViewBox(0, 0, 100, 100)
-                clipPath {
-                    id = myClip
-                    circle {
-                        cx = 40.none
-                        cy = 35.none
-                        r = 35.none
+            """.trimIndent()
+        val actual =
+            svgString(isPrettyPrint = true) {
+                val myClip = SvgId("myClip")
+                val heart = SvgId("heart")
+                svg {
+                    viewBox = ViewBox(0, 0, 100, 100)
+                    clipPath {
+                        id = myClip
+                        circle {
+                            cx = 40.none
+                            cy = 35.none
+                            r = 35.none
+                        }
                     }
-                }
-                path {
-                    id = heart
-                    d {
-                        M(10, 30)
-                        A(rx = 20, ry = 20, angle = 0, largeArcFlag = false, sweepFlag = true, x = 50, y = 30)
-                        A(rx = 20, ry = 20, angle = 0, largeArcFlag = false, sweepFlag = true, x = 90, y = 30)
-                        Q(x1 = 90, x2 = 60, x = 50, y = 90)
-                        Q(x1 = 10, x2 = 60, x = 10, y = 30)
-                        Z
+                    path {
+                        id = heart
+                        d {
+                            M(10, 30)
+                            A(rx = 20, ry = 20, angle = 0, largeArcFlag = false, sweepFlag = true, x = 50, y = 30)
+                            A(rx = 20, ry = 20, angle = 0, largeArcFlag = false, sweepFlag = true, x = 90, y = 30)
+                            Q(x1 = 90, x2 = 60, x = 50, y = 90)
+                            Q(x1 = 10, x2 = 60, x = 10, y = 30)
+                            Z
+                        }
                     }
-                }
-                use {
-                    clipPath(myClip)
-                    href(heart)
-                    // TODO: An unfortunate compromise
-                    fill(SvgColor.Red)
+                    use {
+                        clipPath(myClip)
+                        href(heart)
+                        // TODO: An unfortunate compromise
+                        fill(SvgColor.Red)
+                    }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 }

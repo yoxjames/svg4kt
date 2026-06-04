@@ -40,7 +40,8 @@ import kotlin.test.assertEquals
 class FeGaussianBlurTest {
     @Test
     fun mozillaTest() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="230"
@@ -63,35 +64,36 @@ class FeGaussianBlurTest {
                     fill="green"
                     filter="url(#blurMe)" />
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val blurMe = SvgId("blurMe")
-                width = 230.none
-                height = 120.none
-                filter {
-                    id = blurMe
-                    feGaussianBlur {
-                        `in` = In.SourceGraphic
-                        stdDeviation = NumberOptionalNumber(5, null)
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val blurMe = SvgId("blurMe")
+                    width = 230.none
+                    height = 120.none
+                    filter {
+                        id = blurMe
+                        feGaussianBlur {
+                            `in` = In.SourceGraphic
+                            stdDeviation = NumberOptionalNumber(5, null)
+                        }
+                    }
+                    circle {
+                        cx = 60.none
+                        cy = 60.none
+                        r = 50.none
+                        fill(SvgColor.Green)
+                    }
+                    circle {
+                        cx = 170.none
+                        cy = 60.none
+                        r = 50.none
+                        fill(SvgColor.Green)
+                        filter(blurMe)
                     }
                 }
-                circle {
-                    cx = 60.none
-                    cy = 60.none
-                    r = 50.none
-                    fill(SvgColor.Green)
-                }
-                circle {
-                    cx = 170.none
-                    cy = 60.none
-                    r = 50.none
-                    fill(SvgColor.Green)
-                    filter(blurMe)
-                }
             }
-        }
 
         assertEquals(expected, actual)
     }

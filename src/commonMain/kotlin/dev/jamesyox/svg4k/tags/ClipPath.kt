@@ -62,4 +62,3 @@ public fun <T> clipPath(content: context(AttributeConsumer, @SvgTagDSL ClipPath)
     }
     return consumeTag(tag = ClipPath, content = content)
 }
-

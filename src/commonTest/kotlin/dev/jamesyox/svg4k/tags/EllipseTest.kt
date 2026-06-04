@@ -31,7 +31,8 @@ import kotlin.test.assertEquals
 class EllipseTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 200 100">
@@ -41,18 +42,19 @@ class EllipseTest {
                     rx="100"
                     ry="50" />
             </svg>
-        """.trimIndent()
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                viewBox = ViewBox(0, 0, 200, 100)
-                ellipse {
-                    cx = 100.none
-                    cy = 50.none
-                    rx = 100.none
-                    ry = 50.none
+            """.trimIndent()
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    viewBox = ViewBox(0, 0, 200, 100)
+                    ellipse {
+                        cx = 100.none
+                        cy = 50.none
+                        rx = 100.none
+                        ry = 50.none
+                    }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 }

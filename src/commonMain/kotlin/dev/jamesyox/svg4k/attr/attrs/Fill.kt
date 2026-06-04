@@ -73,7 +73,6 @@ public fun fill(url: Url) {
     fill = SvgPaint.Url(url)
 }
 
-
 /**
  * Defines the color (or any SVG paint servers like gradients or patterns) used to paint the element
  *

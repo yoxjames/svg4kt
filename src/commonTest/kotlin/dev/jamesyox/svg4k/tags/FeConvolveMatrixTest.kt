@@ -37,7 +37,8 @@ import kotlin.test.assertEquals
 class FeConvolveMatrixTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="200"
@@ -58,32 +59,33 @@ class FeConvolveMatrixTest {
                     width="200"
                     filter="url(#emboss)" />
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val emboss = SvgId("emboss")
-                width = 200.none
-                height = 200.none
-                viewBox = ViewBox(0, 0, 200, 200)
-                defs {
-                    filter {
-                        id = emboss
-                        feConvolveMatrix {
-                            kernelMatrix = listOf(3, 0, 0, 0, 0, 0, 0, 0, -3)
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val emboss = SvgId("emboss")
+                    width = 200.none
+                    height = 200.none
+                    viewBox = ViewBox(0, 0, 200, 200)
+                    defs {
+                        filter {
+                            id = emboss
+                            feConvolveMatrix {
+                                kernelMatrix = listOf(3, 0, 0, 0, 0, 0, 0, 0, -3)
+                            }
                         }
                     }
-                }
-                image {
-                    href = "mdn.svg"
-                    x = 0.none
-                    y = 0.none
-                    height = 200.none
-                    width = 200.none
-                    filter(emboss)
+                    image {
+                        href = "mdn.svg"
+                        x = 0.none
+                        y = 0.none
+                        height = 200.none
+                        width = 200.none
+                        filter(emboss)
+                    }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 }

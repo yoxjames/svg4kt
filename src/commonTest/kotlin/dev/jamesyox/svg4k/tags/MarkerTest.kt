@@ -54,7 +54,8 @@ import kotlin.test.assertEquals
 class MarkerTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 300 100">
@@ -86,54 +87,55 @@ class MarkerTest {
                     marker-mid="url(#arrow)"
                     marker-end="url(#arrow)" />
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val arrow = SvgId("arrow")
-                viewBox = ViewBox(0, 0, 300, 100)
-                defs {
-                    marker {
-                        id = arrow
-                        viewBox = ViewBox(0, 0, 10, 10)
-                        refX = RefX.Value(5.none)
-                        refY = RefY.Value(5.none)
-                        markerWidth = 6.none
-                        markerHeight = 6.none
-                        orient = Orient.AutoStartReverse
-                        path {
-                            d {
-                                M(0, 0)
-                                L(10, 5)
-                                L(0, 10)
-                                Z
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val arrow = SvgId("arrow")
+                    viewBox = ViewBox(0, 0, 300, 100)
+                    defs {
+                        marker {
+                            id = arrow
+                            viewBox = ViewBox(0, 0, 10, 10)
+                            refX = RefX.Value(5.none)
+                            refY = RefY.Value(5.none)
+                            markerWidth = 6.none
+                            markerHeight = 6.none
+                            orient = Orient.AutoStartReverse
+                            path {
+                                d {
+                                    M(0, 0)
+                                    L(10, 5)
+                                    L(0, 10)
+                                    Z
+                                }
                             }
                         }
                     }
-                }
-                line {
-                    x1 = 10.none
-                    y1 = 10.none
-                    x2 = 90.none
-                    y2 = 90.none
-                    stroke(SvgColor.Black)
-                    markerEnd(arrow)
-                }
-                path {
-                    d {
-                        M(110, 10)
-                        C(120, 20, 130, 20, 140, 10)
-                        C(150, 0, 160, 0, 170, 10)
-                        C(180, 20, 190, 20, 200, 10)
+                    line {
+                        x1 = 10.none
+                        y1 = 10.none
+                        x2 = 90.none
+                        y2 = 90.none
+                        stroke(SvgColor.Black)
+                        markerEnd(arrow)
                     }
-                    stroke(SvgColor.Black)
-                    fill = SvgPaint.None
-                    markerStart(arrow)
-                    markerMid(arrow)
-                    markerEnd(arrow)
+                    path {
+                        d {
+                            M(110, 10)
+                            C(120, 20, 130, 20, 140, 10)
+                            C(150, 0, 160, 0, 170, 10)
+                            C(180, 20, 190, 20, 200, 10)
+                        }
+                        stroke(SvgColor.Black)
+                        fill = SvgPaint.None
+                        markerStart(arrow)
+                        markerMid(arrow)
+                        markerEnd(arrow)
+                    }
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }

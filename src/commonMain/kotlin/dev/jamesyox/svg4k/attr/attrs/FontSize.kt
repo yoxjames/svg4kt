@@ -44,15 +44,18 @@ public var fontSize: FontSize
 public sealed interface FontSize : SvgAttributeType {
     public class Absolute(
         public val value: AbsoluteSize,
-    ) : FontSize, WrappedSvgAttributeType(value)
+    ) : WrappedSvgAttributeType(value),
+        FontSize
 
     public class Relative(
         public val value: RelativeSize,
-    ) : FontSize, WrappedSvgAttributeType(value)
+    ) : WrappedSvgAttributeType(value),
+        FontSize
 
     public class Value(
         public val value: LengthOrPercentage,
-    ) : FontSize, WrappedSvgAttributeType(value)
+    ) : WrappedSvgAttributeType(value),
+        FontSize
 }
 
 // TODO: Does this need docs?

@@ -36,7 +36,8 @@ import kotlin.test.assertEquals
 class FeMorphologyTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="300"
@@ -68,47 +69,48 @@ class FeMorphologyTest {
                     Fattened text
                 </text>
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                val erode = SvgId("erode")
-                val dilate = SvgId("dilate")
-                val thin = SvgId("thin")
-                val thick = SvgId("thick")
-                width = 300.none
-                height = 180.none
-                filter {
-                    id = erode
-                    feMorphology {
-                        operator = MorphOperator.Erode
-                        radius = NumberOptionalNumber(1, null)
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    val erode = SvgId("erode")
+                    val dilate = SvgId("dilate")
+                    val thin = SvgId("thin")
+                    val thick = SvgId("thick")
+                    width = 300.none
+                    height = 180.none
+                    filter {
+                        id = erode
+                        feMorphology {
+                            operator = MorphOperator.Erode
+                            radius = NumberOptionalNumber(1, null)
+                        }
                     }
-                }
-                filter {
-                    id = dilate
-                    feMorphology {
-                        operator = MorphOperator.Dilate
-                        radius = NumberOptionalNumber(2, null)
+                    filter {
+                        id = dilate
+                        feMorphology {
+                            operator = MorphOperator.Dilate
+                            radius = NumberOptionalNumber(2, null)
+                        }
                     }
-                }
-                text {
-                    y = listOf(1.em)
-                    +"Normal text"
-                }
+                    text {
+                        y = listOf(1.em)
+                        +"Normal text"
+                    }
 
-                text {
-                    id = thin
-                    y = listOf(2.em)
-                    +"Thinned text"
-                }
-                text {
-                    id = thick
-                    y = listOf(3.em)
-                    +"Fattened text"
+                    text {
+                        id = thin
+                        y = listOf(2.em)
+                        +"Thinned text"
+                    }
+                    text {
+                        id = thick
+                        y = listOf(3.em)
+                        +"Fattened text"
+                    }
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }

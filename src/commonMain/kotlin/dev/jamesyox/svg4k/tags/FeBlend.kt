@@ -53,9 +53,7 @@ public data object FeBlend :
  */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeBlend)
-public fun <T> feBlend(
-    content: context(AttributeConsumer, @SvgTagDSL FeBlend) () -> Unit
-): T {
+public fun <T> feBlend(content: context(AttributeConsumer, @SvgTagDSL FeBlend) () -> Unit): T {
     contract {
         callsInPlace(content, InvocationKind.EXACTLY_ONCE)
     }

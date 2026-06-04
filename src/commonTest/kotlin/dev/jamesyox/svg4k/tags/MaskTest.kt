@@ -49,7 +49,8 @@ import kotlin.test.assertEquals
 class MaskTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="-10 -10 120 120">
@@ -82,58 +83,60 @@ class MaskTest {
                     fill="purple"
                     mask="url(#myMask)" />
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            val myMask = SvgId("myMask")
-            svg {
-                viewBox = ViewBox(-10, -10, 120, 120)
-                rect {
-                    x = (-10).none
-                    y = (-10).none
-                    width = 120.none
-                    height = 120.none
-                    fill(SvgColor.Blue)
-                }
-                mask {
-                    id = myMask
-                    maskType = MaskType.Luminance
+        val actual =
+            svgString(isPrettyPrint = true) {
+                val myMask = SvgId("myMask")
+                svg {
+                    viewBox = ViewBox(-10, -10, 120, 120)
                     rect {
-                        x = 0.none
-                        y = 0.none
-                        width = 100.none
-                        height = 100.none
-                        fill(SvgColor.White)
+                        x = (-10).none
+                        y = (-10).none
+                        width = 120.none
+                        height = 120.none
+                        fill(SvgColor.Blue)
                     }
-                    path {
-                        d {
-                            M(10, 35)
-                            A(rx = 20, ry = 20, angle = 0, largeArcFlag = false, sweepFlag = true, x = 50, y = 35)
-                            A(rx = 20, ry = 20, angle = 0, largeArcFlag = false, sweepFlag = true, x = 90, y = 35)
-                            Q(x1 = 90, x2 = 65, x = 50, y = 95)
-                            Q(x1 = 10, x2 = 65, x = 10, y = 35)
-                            Z
+                    mask {
+                        id = myMask
+                        maskType = MaskType.Luminance
+                        rect {
+                            x = 0.none
+                            y = 0.none
+                            width = 100.none
+                            height = 100.none
+                            fill(SvgColor.White)
                         }
-                        fill(SvgColor.Black)
+                        path {
+                            d {
+                                M(10, 35)
+                                A(rx = 20, ry = 20, angle = 0, largeArcFlag = false, sweepFlag = true, x = 50, y = 35)
+                                A(rx = 20, ry = 20, angle = 0, largeArcFlag = false, sweepFlag = true, x = 90, y = 35)
+                                Q(x1 = 90, x2 = 65, x = 50, y = 95)
+                                Q(x1 = 10, x2 = 65, x = 10, y = 35)
+                                Z
+                            }
+                            fill(SvgColor.Black)
+                        }
                     }
-                }
-                polygon {
-                    points = listOf(
-                        Point(-10, 110),
-                        Point(110, 110),
-                        Point(110, -10)
-                    )
-                    fill(SvgColor.Orange)
-                }
-                circle {
-                    cx = 50.none
-                    cy = 50.none
-                    r = 50.none
-                    fill(SvgColor.Purple)
-                    mask(myMask)
+                    polygon {
+                        points =
+                            listOf(
+                                Point(-10, 110),
+                                Point(110, 110),
+                                Point(110, -10),
+                            )
+                        fill(SvgColor.Orange)
+                    }
+                    circle {
+                        cx = 50.none
+                        cy = 50.none
+                        r = 50.none
+                        fill(SvgColor.Purple)
+                        mask(myMask)
+                    }
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }

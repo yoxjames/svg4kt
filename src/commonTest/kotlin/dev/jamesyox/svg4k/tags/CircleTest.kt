@@ -30,7 +30,8 @@ import kotlin.test.assertEquals
 class CircleTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 100 100">
@@ -39,35 +40,38 @@ class CircleTest {
                     cy="50"
                     r="50" />
             </svg>
-        """.trimIndent()
-        val actual = svgString(isPrettyPrint = true) {
-            svg {
-                viewBox = ViewBox(0, 0, 100, 100)
-                circle {
-                    cx = 50.none
-                    cy = 50.none
-                    r = 50.none
+            """.trimIndent()
+        val actual =
+            svgString(isPrettyPrint = true) {
+                svg {
+                    viewBox = ViewBox(0, 0, 100, 100)
+                    circle {
+                        cx = 50.none
+                        cy = 50.none
+                        r = 50.none
+                    }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 
     @Test
     fun mozillaExampleMinified() {
-        val expected = """
+        val expected =
+            """
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" /></svg>
-        """.trimIndent()
-        val actual = svgString {
-            svg {
-                viewBox = ViewBox(0, 0, 100, 100)
-                circle {
-                    cx = 50.none
-                    cy = 50.none
-                    r = 50.none
+            """.trimIndent()
+        val actual =
+            svgString {
+                svg {
+                    viewBox = ViewBox(0, 0, 100, 100)
+                    circle {
+                        cx = 50.none
+                        cy = 50.none
+                        r = 50.none
+                    }
                 }
             }
-        }
         assertEquals(expected, actual)
     }
 }

@@ -47,7 +47,10 @@ internal class SvgElementTagConsumer(
 
     private var last: SVGElement? = null
 
-    override fun set(key: String, value: String) {
+    override fun set(
+        key: String,
+        value: String,
+    ) {
         attributeConsumer[key] = value
     }
 
@@ -86,15 +89,11 @@ internal class SvgElementTagConsumer(
         last = domStack.removeAt(domStack.lastIndex)
     }
 
-    override fun output(): SVGElement {
-        return last!!
-    }
+    override fun output(): SVGElement = last!!
 }
 
 @IgnorableReturnValue
-public fun Node.appendSvg(
-    block: context(TagConsumer<SVGElement>, Svg, AttributeConsumer) () -> Unit
-): SVGElement {
+public fun Node.appendSvg(block: context(TagConsumer<SVGElement>, Svg, AttributeConsumer) () -> Unit): SVGElement {
     contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
@@ -121,21 +120,19 @@ public fun createSvg(block: context(TagConsumer<SVGElement>, Svg, AttributeConsu
     return context(RootContainer) { SvgElementTagConsumer(document).apply { svg { block() } } }.output()
 }
 
-public fun createSvgFragment(
-    block: context(TagConsumer<SVGElement>, AllElementContainer) () -> Unit
-): List<SVGElement> {
+public fun createSvgFragment(block: context(TagConsumer<SVGElement>, AllElementContainer) () -> Unit): List<SVGElement> {
     contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
     val list = mutableListOf<SVGElement>()
     val tagConsumer = SvgElementTagConsumer(document)
     context(UnsafeContainer) {
-        tagConsumer.onFinalize { element, isPartial ->
-            if (!isPartial) {
-                list.add(element)
-            }
-        }.apply { block() }
+        tagConsumer
+            .onFinalize { element, isPartial ->
+                if (!isPartial) {
+                    list.add(element)
+                }
+            }.apply { block() }
         return list
     }
 }
-

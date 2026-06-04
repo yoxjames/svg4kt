@@ -36,7 +36,8 @@ import kotlin.test.assertEquals
 class ViewTest {
     @Test
     fun mozillaExample() {
-        val expected = """
+        val expected =
+            """
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 300 100"
@@ -67,48 +68,49 @@ class ViewTest {
                     r="40"
                     fill="blue" />
             </svg>
-        """.trimIndent()
+            """.trimIndent()
 
-        val actual = svgString(isPrettyPrint = true) {
-            val one = SvgId("one")
-            val two = SvgId("two")
-            val three = SvgId("three")
-            svg {
-                viewBox = ViewBox(0, 0, 300, 100)
-                width = 300.none
-                height = 100.none
-                view {
-                    id = one
-                    viewBox = ViewBox(0, 0, 100, 100)
-                }
-                circle {
-                    cx = 50.none
-                    cy = 50.none
-                    r = 40.none
-                    fill(SvgColor.Red)
-                }
-                view {
-                    id = two
-                    viewBox = ViewBox(100, 0, 100, 100)
-                }
-                circle {
-                    cx = 150.none
-                    cy = 50.none
-                    r = 40.none
-                    fill(SvgColor.Green)
-                }
-                view {
-                    id = three
-                    viewBox = ViewBox(200, 0, 100, 100)
-                }
-                circle {
-                    cx = 250.none
-                    cy = 50.none
-                    r = 40.none
-                    fill(SvgColor.Blue)
+        val actual =
+            svgString(isPrettyPrint = true) {
+                val one = SvgId("one")
+                val two = SvgId("two")
+                val three = SvgId("three")
+                svg {
+                    viewBox = ViewBox(0, 0, 300, 100)
+                    width = 300.none
+                    height = 100.none
+                    view {
+                        id = one
+                        viewBox = ViewBox(0, 0, 100, 100)
+                    }
+                    circle {
+                        cx = 50.none
+                        cy = 50.none
+                        r = 40.none
+                        fill(SvgColor.Red)
+                    }
+                    view {
+                        id = two
+                        viewBox = ViewBox(100, 0, 100, 100)
+                    }
+                    circle {
+                        cx = 150.none
+                        cy = 50.none
+                        r = 40.none
+                        fill(SvgColor.Green)
+                    }
+                    view {
+                        id = three
+                        viewBox = ViewBox(200, 0, 100, 100)
+                    }
+                    circle {
+                        cx = 250.none
+                        cy = 50.none
+                        r = 40.none
+                        fill(SvgColor.Blue)
+                    }
                 }
             }
-        }
 
         assertEquals(expected, actual)
     }
