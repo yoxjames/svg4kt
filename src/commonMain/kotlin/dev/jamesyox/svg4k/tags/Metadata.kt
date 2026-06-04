@@ -35,6 +35,10 @@ public data object Metadata :
     override val tagName: String = "metadata"
 }
 
+/**
+ * The `<metadata>` SVG element adds metadata to SVG content. Metadata is structured information about data.
+ * The contents of `<metadata>` should be elements from other XML namespaces such as RDF, FOAF, etc.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Metadata)
 public fun <T> metadata(content: context(AttributeConsumer, @SvgTagDSL Metadata) () -> Unit): T {

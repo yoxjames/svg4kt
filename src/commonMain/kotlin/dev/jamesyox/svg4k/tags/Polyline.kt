@@ -69,6 +69,11 @@ public data object Polyline :
     override val tagName: String = "polyline"
 }
 
+/**
+ * The <polyline> SVG element is an SVG basic shape that creates straight lines connecting several points.
+ * Typically, a polyline is used to create open shapes as the last point doesn't have to be connected to the first
+ * point. For closed shapes see the [polygon] element.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Polyline)
 public fun <T> polyline(content: context(AttributeConsumer, @SvgTagDSL Polyline) () -> Unit): T {

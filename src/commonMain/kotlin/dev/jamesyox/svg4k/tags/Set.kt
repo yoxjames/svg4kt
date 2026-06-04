@@ -52,6 +52,12 @@ public data object Set :
     override val tagName: String = "set"
 }
 
+/**
+ * The `<set>` SVG element provides a method of setting the value of an attribute for a specified duration.
+ *
+ * It supports all attribute types, including those that cannot reasonably be interpolated, such as string and boolean
+ * values. For attributes that can be reasonably be interpolated, the [animate] is usually preferred.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Set)
 public fun <T> set(content: context (AttributeConsumer, @SvgTagDSL Set) () -> Unit): T {

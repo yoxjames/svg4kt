@@ -45,6 +45,21 @@ public data object FeDisplacementMap :
     override val tagName: String = "feDisplacementMap"
 }
 
+/**
+ * The `<feDisplacementMap>` SVG filter primitive uses the pixel values from the image from in2 to spatially displace
+ * the image from in.
+ *
+ * The formula for the transformation looks like this:
+ *
+ * `P'(x,y) ← P(x + scale * (XC(x,y) - 0.5), y + scale * (YC(x,y) - 0.5))`
+ *
+ * where `P(x,y)` is the input image, in, and `P'(x,y)` is the destination. `XC(x,y)` and `YC(x,y)` are the component
+ * values of the channel designated by [dev.jamesyox.svg4k.attr.attrs.xChannelSelector]
+ * and [dev.jamesyox.svg4k.attr.attrs.yChannelSelector].
+ *
+ * Like other filter primitives, it handles color components in the linearRGB color space by default.
+ * You can use [dev.jamesyox.svg4k.attr.attrs.colorInterpolationFilters] to use sRGB instead.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeDisplacementMap)
 public fun <T> feDisplacementMap(content: context(AttributeConsumer, @SvgTagDSL FeDisplacementMap) () -> Unit): T {

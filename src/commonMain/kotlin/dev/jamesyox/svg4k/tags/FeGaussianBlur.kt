@@ -44,6 +44,13 @@ public data object FeGaussianBlur :
     override val tagName: String = "feGaussianBlur"
 }
 
+/**
+ * The `<feGaussianBlur>` SVG filter primitive blurs the input image by the amount specified in
+ * [dev.jamesyox.svg4k.attr.attrs.stdDeviation], which defines the bell-curve.
+ *
+ * Like other filter primitives, it handles color components in the linearRGB color space by default.
+ * You can use [dev.jamesyox.svg4k.attr.attrs.colorInterpolationFilters] to use sRGB instead.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeGaussianBlur)
 public fun <T> feGaussianBlur(content: context(AttributeConsumer, @SvgTagDSL FeGaussianBlur) () -> Unit): T {

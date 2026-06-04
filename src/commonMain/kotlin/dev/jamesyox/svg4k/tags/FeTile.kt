@@ -42,6 +42,10 @@ public data object FeTile :
     override val tagName: String = "feTile"
 }
 
+/**
+ * The `<feTile>` SVG filter primitive allows to fill a target rectangle with a repeated, tiled pattern of an input
+ * image. The effect is similar to the one of a [pattern].
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeTile)
 public fun <T> feTile(content: context(AttributeConsumer, @SvgTagDSL FeTile) () -> Unit): T {

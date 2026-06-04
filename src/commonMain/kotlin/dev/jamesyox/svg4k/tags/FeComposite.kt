@@ -48,6 +48,13 @@ public data object FeComposite :
     override val tagName: String = "feComposite"
 }
 
+/**
+ * The <feComposite> SVG filter primitive performs the combination of two input images pixel-wise in image space
+ * using one of the Porter-Duff compositing operations: over, in, atop, out, xor, lighter, or arithmetic.
+ *
+ * Like other filter primitives, it handles color components in the linearRGB color space by default.
+ * You can use [dev.jamesyox.svg4k.attr.attrs.colorInterpolationFilters] to use sRGB instead.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeComposite)
 public fun <T> feComposite(content: context(AttributeConsumer, @SvgTagDSL FeComposite) () -> Unit): T {

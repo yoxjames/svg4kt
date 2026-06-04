@@ -86,6 +86,13 @@ public data object Text :
     override val tagName: String = "text"
 }
 
+/**
+ * The `<text>` SVG element draws a graphics element consisting of text. It's possible to apply a gradient, pattern,
+ * clipping path, mask, or filter to `<text>`, like any other SVG graphics element.
+ *
+ * If text is included in SVG not inside of a `<text>` element, it is not rendered. This is different than being
+ * hidden by default, as setting the display property won't show the text.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Text)
 public fun <T> text(content: context(AttributeConsumer, @SvgTagDSL Text) () -> Unit): T {

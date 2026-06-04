@@ -43,6 +43,14 @@ public data object FeBlend :
     override val tagName: String = "feBlend"
 }
 
+/**
+ * The `<feBlend>` SVG filter primitive composes two objects together ruled by a certain blending mode.
+ * This is similar to what is known from image editing software when blending two layers.
+ * The mode is defined by the [dev.jamesyox.svg4k.attr.attrs.mode] attribute.
+ *
+ * Like other filter primitives, it handles color components in the linearRGB color space by default.
+ * You can use [dev.jamesyox.svg4k.attr.attrs.colorInterpolationFilters] to use sRGB instead.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeBlend)
 public fun <T> feBlend(

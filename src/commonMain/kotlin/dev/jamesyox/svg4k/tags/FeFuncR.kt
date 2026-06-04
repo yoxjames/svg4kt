@@ -42,6 +42,10 @@ public data object FeFuncR :
     override val tagName: String = "feFuncR"
 }
 
+/**
+ * The `<feFuncR>` SVG filter primitive defines the transfer function for the red component of the input graphic of
+ * its parent [feComponentTransfer] element.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeFuncR)
 public fun <T> feFuncR(content: context(AttributeConsumer, @SvgTagDSL FeFuncR) () -> Unit): T {

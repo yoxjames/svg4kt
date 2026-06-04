@@ -46,6 +46,16 @@ public data object FeDropShadow :
     override val tagName: String = "feDropShadow"
 }
 
+/**
+ * The `<feDropShadow>` SVG filter primitive creates a drop shadow of the input image. It can only be used inside a
+ * [filter] element.
+ *
+ * Note: The drop shadow color and opacity can be changed by using the [dev.jamesyox.svg4k.attr.attrs.floodColor] and
+ * [dev.jamesyox.svg4k.attr.attrs.floodOpacity] presentation attributes.
+ *
+ * Like other filter primitives, it handles color components in the linearRGB color space by default.
+ * You can use [dev.jamesyox.svg4k.attr.attrs.colorInterpolationFilters] to use sRGB instead.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeDropShadow)
 public fun <T> feDropShadow(content: context(AttributeConsumer, @SvgTagDSL FeDropShadow) () -> Unit): T {

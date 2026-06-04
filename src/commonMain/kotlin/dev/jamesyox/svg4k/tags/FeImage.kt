@@ -44,6 +44,10 @@ public data object FeImage :
     override val tagName: String = "feImage"
 }
 
+/**
+ * The `<feImage>` SVG filter primitive fetches image data from an external source and provides the pixel data as
+ * output (meaning if the external source is an SVG image, it is rasterized.)
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeImage)
 public fun <T> feImage(content: context(AttributeConsumer, @SvgTagDSL FeImage) () -> Unit): T {

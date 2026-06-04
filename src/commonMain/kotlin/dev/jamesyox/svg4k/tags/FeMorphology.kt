@@ -43,6 +43,13 @@ public data object FeMorphology :
     override val tagName: String = "feMorphology"
 }
 
+/**
+ * The `<feMorphology>` SVG filter primitive is used to erode or dilate the input image. Its usefulness lies especially
+ * in fattening or thinning effects.
+ *
+ * Like other filter primitives, it handles color components in the linearRGB color space by default.
+ * You can use [dev.jamesyox.svg4k.attr.attrs.colorInterpolationFilters] to use sRGB instead.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeMorphology)
 public fun <T> feMorphology(content: context(AttributeConsumer, @SvgTagDSL FeMorphology) () -> Unit): T {

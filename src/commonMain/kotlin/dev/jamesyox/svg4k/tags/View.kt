@@ -37,6 +37,10 @@ public data object View :
     override val tagName: String = "view"
 }
 
+/**
+ * The `<view>` SVG element defines a particular view of an SVG document. A specific view can be displayed by
+ * referencing the `<view>` element's [dev.jamesyox.svg4k.attr.attrs.id] as the target fragment of a URL.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.View)
 public fun <T> view(content: context(AttributeConsumer, @SvgTagDSL View) () -> Unit): T {

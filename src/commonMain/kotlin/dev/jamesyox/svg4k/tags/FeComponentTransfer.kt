@@ -44,6 +44,18 @@ public data object FeComponentTransfer :
     override val tagName: String = "feComponentTransfer"
 }
 
+/**
+ * The `<feComponentTransfer>` SVG filter primitive performs color-component-wise remapping of data for each pixel.
+ * It allows operations like brightness adjustment, contrast adjustment, color balance or thresholding.
+ *
+ * The calculations are performed on non-premultiplied color values. The colors are modified by changing each channel
+ * (R, G, B, and A) to the result of what the children [feFuncR], [feFuncB], [feFuncG], and [feFuncA] return.
+ * If more than one of the same element is provided, the last one specified is used, and if no element is supplied to
+ * modify one of the channels, the effect is the same is if an identity transformation had been given for that channel.
+ *
+ * Like other filter primitives, it handles color components in the linearRGB color space by default.
+ * You can use [dev.jamesyox.svg4k.attr.attrs.colorInterpolationFilters] to use sRGB instead.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeComponentTransfer)
 public fun <T> feComponentTransfer(content: context(AttributeConsumer, @SvgTagDSL FeComponentTransfer) () -> Unit): T {

@@ -71,6 +71,13 @@ public data object Symbol :
     override val tagName: String = "symbol"
 }
 
+/**
+ * The `<symbol>` SVG element is used to define graphical template objects which can be instantiated by a [use] element.
+ *
+ * The use of `<symbol>` elements for graphics that are used multiple times in the same document adds structure and
+ * semantics. Documents that are rich in structure may be rendered graphically, as speech, or as Braille,
+ * and thus promote accessibility.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Switch)
 public fun <T> symbol(content: context(AttributeConsumer, @SvgTagDSL Symbol) () -> Unit): T {

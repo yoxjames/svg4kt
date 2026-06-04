@@ -35,6 +35,17 @@ public data object Desc :
     override val tagName: String = "desc"
 }
 
+/**
+ * The `<desc>` SVG element provides an accessible, long-text description of any SVG container element or graphics
+ * element.
+ *
+ * Text in a `<desc>` element is not rendered as part of the graphic. If the element can be described by visible text,
+ * it is possible to reference that text with the aria-describedby attribute. If `aria-describedby` is used, it will
+ * take precedence over `<desc>`.
+ *
+ * The hidden text of a `<desc>` element can also be concatenated with the visible text of other elements using
+ * multiple IDs in an `aria-describedby` value. In that case, the `<desc>` element must provide an ID for reference.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Desc)
 public fun <T> desc(content: context(AttributeConsumer, @SvgTagDSL Desc) () -> Unit): T {

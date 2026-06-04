@@ -79,6 +79,10 @@ public data object Tspan :
     override val tagName: String = "tspan"
 }
 
+/**
+ * The `<tspan>` SVG element defines a subtext within a [text] element or another `<tspan>` element.
+ * It allows for adjustment of the style and/or position of that subtext as needed.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Tspan)
 public fun <T> tspan(content: context(AttributeConsumer, @SvgTagDSL Tspan) () -> Unit): T {

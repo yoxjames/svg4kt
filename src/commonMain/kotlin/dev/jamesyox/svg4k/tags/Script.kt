@@ -35,6 +35,9 @@ public data object Script :
     override val tagName: String = "script"
 }
 
+/**
+ * The `<script>` SVG element allows to add scripts to an SVG document.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Script)
 public fun <T> script(content: context (AttributeConsumer, @SvgTagDSL Script) () -> Unit): T {

@@ -47,6 +47,10 @@ public data object ForeignObject :
     override val tagName: String = "foreignObject"
 }
 
+/**
+ * The `<foreignObject>` SVG element includes elements from a different XML namespace. In the context of a browser,
+ * it is most likely (X)HTML.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.ForeignObject)
 public fun <T> foreignObject(content: context(AttributeConsumer, @SvgTagDSL ForeignObject) () -> Unit): T {

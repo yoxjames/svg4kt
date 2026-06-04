@@ -85,6 +85,11 @@ public data object TextPath :
     override val tagName: String = "textPath"
 }
 
+/**
+ * The `<textPath>` SVG element is used to render text along the shape of a [path] element. The text must be enclosed
+ * in the `<textPath>` element and its [dev.jamesyox.svg4k.attr.attrs.href] attribute is used to reference the desired
+ * [path].
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.TextPath)
 public fun <T> textPath(content: context(AttributeConsumer, @SvgTagDSL TextPath) () -> Unit): T {

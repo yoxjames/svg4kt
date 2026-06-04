@@ -47,6 +47,13 @@ public data object ClipPath :
     override val tagName: String = "clipPath"
 }
 
+/**
+ * The `<clipPath>` SVG element defines a clipping path, to be used by the [dev.jamesyox.svg4k.attr.attrs.clipPath]
+ * property.
+ *
+ * A clipping path restricts the region to which paint can be applied. Conceptually, parts of the drawing that lie
+ * outside of the region bounded by the clipping path are not drawn.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.ClipPath)
 public fun <T> clipPath(content: context(AttributeConsumer, @SvgTagDSL ClipPath) () -> Unit): T {

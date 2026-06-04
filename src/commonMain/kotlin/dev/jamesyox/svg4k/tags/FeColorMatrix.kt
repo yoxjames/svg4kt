@@ -42,6 +42,11 @@ public data object FeColorMatrix :
     override val tagName: String = "feColorMatrix"
 }
 
+/**
+ * The `<feColorMatrix>` SVG filter element changes colors based on a transformation matrix.
+ * Every pixel's color value `[R,G,B,A]` is matrix multiplied by a 5 by 5 color matrix to
+ * create new color `[R',G',B',A']`.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeColorMatrix)
 public fun <T> feColorMatrix(content: context(AttributeConsumer, @SvgTagDSL FeColorMatrix) () -> Unit): T {

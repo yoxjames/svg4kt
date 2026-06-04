@@ -43,6 +43,11 @@ public data object Use :
     override val tagName: String = "use"
 }
 
+/**
+ * The <use> element takes nodes from within an SVG document, and duplicates them somewhere else.
+ * The effect is the same as if the nodes were deeply cloned into a non-exposed DOM,
+ * then pasted where the <use> element is, much like cloned `<template>` elements.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Use)
 public fun <T> use(content: context(AttributeConsumer, @SvgTagDSL Use) () -> Unit): T {

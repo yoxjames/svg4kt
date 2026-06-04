@@ -68,6 +68,10 @@ public data object Rect :
     override val tagName: String = "rect"
 }
 
+/**
+ * The `<rect>` SVG element is a basic SVG shape that draws rectangles, defined by their position, width, and height.
+ * The rectangles may have their corners rounded.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Rect)
 public fun <T> rect(content: context (AttributeConsumer, @SvgTagDSL Rect) () -> Unit): T {

@@ -42,6 +42,10 @@ public data object FeFuncA :
     override val tagName: String = "feFuncA"
 }
 
+/**
+ * The `<feFuncA>` SVG filter primitive defines the transfer function for the alpha component of the input graphic
+ * of its parent [feComponentTransfer] element.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeFuncA)
 public fun <T> feFuncA(content: context(AttributeConsumer, @SvgTagDSL FeFuncA) () -> Unit): T {

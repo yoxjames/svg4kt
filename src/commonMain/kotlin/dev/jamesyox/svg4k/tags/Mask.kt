@@ -67,6 +67,10 @@ public data object Mask :
     override val tagName: String = "mask"
 }
 
+/**
+ * The `<mask>` SVG element defines a mask for compositing the current object into the background.
+ * A mask is used/referenced using the [dev.jamesyox.svg4k.attr.attrs.mask] property and CSS `mask-image` property
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Mask)
 public fun <T> mask(content: context(AttributeConsumer, @SvgTagDSL Mask) () -> Unit): T {

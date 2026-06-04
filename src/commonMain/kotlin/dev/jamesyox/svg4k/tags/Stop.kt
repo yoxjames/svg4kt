@@ -41,6 +41,10 @@ public data object Stop :
     override val tagName: String = "stop"
 }
 
+/**
+ * The `<stop>` SVG element defines a color and its position to use on a gradient. This element is always a child of a
+ * [linearGradient] or [radialGradient] element.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Stop)
 public fun <T> stop(content: context (AttributeConsumer, @SvgTagDSL Stop) () -> Unit): T {

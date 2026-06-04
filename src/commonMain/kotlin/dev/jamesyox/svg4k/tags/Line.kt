@@ -63,6 +63,9 @@ public data object Line :
     override val tagName: String = "line"
 }
 
+/**
+ * The `<line>` SVG element is an SVG basic shape used to create a line connecting two points.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Line)
 public fun <T> line(content: context(AttributeConsumer, @SvgTagDSL Line) () -> Unit): T {

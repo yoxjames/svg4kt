@@ -58,6 +58,10 @@ public data object AnimateTransform :
     override val tagName: String = "animateTransform"
 }
 
+/**
+ * The `<animateTransform>` SVG element animates a transformation attribute on its target element, thereby allowing
+ * animations to control translation, scaling, rotation, and/or skewing.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.AnimateTransform)
 public fun <T> animateTransform(content: context(AttributeConsumer, @SvgTagDSL AnimateTransform) () -> Unit): T {

@@ -60,6 +60,9 @@ public data object Animate :
     override val tagName: String = "animate"
 }
 
+/**
+ * The `<animate>` SVG element provides a way to animate an attribute of an element over time.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: AnimationElementContainer)
 public fun <T> animate(content: context(AttributeConsumer, @SvgTagDSL Animate) () -> Unit): T {

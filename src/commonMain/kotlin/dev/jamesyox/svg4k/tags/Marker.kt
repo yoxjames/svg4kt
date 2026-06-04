@@ -67,6 +67,13 @@ public data object Marker :
     override val tagName: String = "marker"
 }
 
+/**
+ * The `<marker>` SVG element defines a graphic used for drawing arrowheads or polymarkers on a given [path], [line],
+ * [polyline] or [polygon] element.
+ *
+ * Markers can be attached to shapes using the [dev.jamesyox.svg4k.attr.attrs.markerStart],
+ * [dev.jamesyox.svg4k.attr.attrs.markerMid], and [dev.jamesyox.svg4k.attr.attrs.markerEnd] properties.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Marker)
 public fun <T> marker(content: context(AttributeConsumer, @SvgTagDSL Marker) () -> Unit): T {

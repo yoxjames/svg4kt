@@ -43,6 +43,10 @@ public data object FeSpotLight :
     override val tagName: String = "feSpotLight"
 }
 
+/**
+ * The `<feSpotLight>` SVG element defines a light source that can be used to create a spotlight effect.
+ * It is used within a lighting filter primitive: [feDiffuseLighting] or [feSpecularLighting].
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeSpotLight)
 public fun <T> feSpotLight(content: context(AttributeConsumer, @SvgTagDSL FeSpotLight) () -> Unit): T {

@@ -45,6 +45,9 @@ public data object LinearGradient :
     override val tagName: String = "linearGradient"
 }
 
+/**
+ * The `<linearGradient>` SVG element lets authors define linear gradients to apply to other SVG elements.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.LinearGradient)
 public fun <T> linearGradient(content: context(AttributeConsumer, @SvgTagDSL LinearGradient) () -> Unit): T {

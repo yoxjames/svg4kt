@@ -45,6 +45,14 @@ public data object FeTurbulence :
     override val tagName: String = "feTurbulence"
 }
 
+/**
+ * The `<feTurbulence>` SVG filter primitive creates an image using the Perlin turbulence function. It allows the
+ * synthesis of artificial textures like clouds or marble. The resulting image will fill the entire filter primitive
+ * subregion.
+ *
+ * Like other filter primitives, it handles color components in the linearRGB color space by default.
+ * ou can use [dev.jamesyox.svg4k.attr.attrs.colorInterpolationFilters] to use sRGB instead.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeTurbulence)
 public fun <T> feTurbulence(content: context(AttributeConsumer, @SvgTagDSL FeTurbulence) () -> Unit): T {

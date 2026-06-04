@@ -42,6 +42,11 @@ public data object Filter :
     override val tagName: String = "filter"
 }
 
+/**
+ * The `<filter>` SVG element defines a custom filter effect by grouping atomic filter primitives.
+ * It is never rendered itself, but must be used by the filter attribute on SVG elements, or the filter CSS property
+ * for SVG/HTML elements.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Filter)
 public fun <T> filter(content: context(AttributeConsumer, @SvgTagDSL Filter) () -> Unit): T {

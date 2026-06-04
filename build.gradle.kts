@@ -52,7 +52,6 @@ kotlin {
         freeCompilerArgs.add("-Xallow-contracts-on-more-functions")
         freeCompilerArgs.add("-opt-in=kotlin.contracts.ExperimentalContracts")
         freeCompilerArgs.add("-Xreturn-value-checker=full")
-        freeCompilerArgs.add("-Xcontext-parameters")
     }
     explicitApi()
     jvm {
@@ -96,19 +95,16 @@ kotlin {
 
     // Native: https://kotlinlang.org/docs/native-target-support.html
     // Tier 1
-    linuxX64()
-    macosX64()
     macosArm64()
     iosSimulatorArm64()
     iosX64()
     // Tier 2
+    linuxX64()
     linuxArm64()
     watchosSimulatorArm64()
-    watchosX64()
     watchosArm32()
     watchosArm64()
     tvosSimulatorArm64()
-    tvosX64()
     tvosArm64()
     iosArm64()
     // Tier 3

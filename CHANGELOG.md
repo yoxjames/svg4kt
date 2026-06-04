@@ -1,4 +1,6 @@
-## 0.1.0-beta.1
+## 0.1.0
+* Bumped Kotlin to 2.4.0. 
+* Added KDocs to SVG Elements.
 * `SvgColor.Hex(...)` no longer takes a number. This was wrong from the beginning. SVG's hex colors are a format
   For instance `0x00111111` and `0x111111` are the same number but different colors. Therefore, you now must declare the
   format: `SvgColor.Hex.RGB(0x111111)` vs `SvgColor.Hex.RGBA(0x00111111)`

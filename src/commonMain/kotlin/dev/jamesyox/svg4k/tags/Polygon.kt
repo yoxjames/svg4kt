@@ -68,6 +68,12 @@ public data object Polygon :
     override val tagName: String = "polygon"
 }
 
+/**
+ * The `<polygon>` SVG element defines a closed shape consisting of a set of connected straight line segments.
+ * The last point is connected to the first point.
+ *
+ * For open shapes, see the [polyline] element.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Polygon)
 public fun <T> polygon(content: context(AttributeConsumer, @SvgTagDSL Polygon) () -> Unit): T {

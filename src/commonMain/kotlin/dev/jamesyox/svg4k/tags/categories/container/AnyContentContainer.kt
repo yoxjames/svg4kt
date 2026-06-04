@@ -17,7 +17,6 @@
 
 package dev.jamesyox.svg4k.tags.categories.container
 
-// TODO: Should this have anything else?
 public interface AnyContentContainer :
     AllElementContainer,
     TextContentContainer

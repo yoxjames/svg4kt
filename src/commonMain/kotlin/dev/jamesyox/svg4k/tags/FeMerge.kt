@@ -40,6 +40,14 @@ public data object FeMerge :
     override val tagName: String = "feMerge"
 }
 
+/**
+ * The `<feMerge>` SVG element allows filter effects to be applied concurrently instead of sequentially.
+ * This is achieved by other filters storing their output via the result attribute and then accessing it in a
+ * `[feMergeNode] child.
+ *
+ * Like other filter primitives, it handles color components in the linearRGB color space by default.
+ * You can use [dev.jamesyox.svg4k.attr.attrs.colorInterpolationFilters] to use sRGB instead.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeMerge)
 public fun <T> feMerge(content: context(AttributeConsumer, @SvgTagDSL FeMerge) () -> Unit): T {

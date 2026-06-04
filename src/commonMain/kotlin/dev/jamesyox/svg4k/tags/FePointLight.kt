@@ -37,6 +37,10 @@ public data object FePointLight :
     override val tagName: String = "fePointLight"
 }
 
+/**
+ * The `<fePointLight>` SVG element defines a light source which allows to create a point light effect.
+ * It can be used within a lighting filter primitive: [feDiffuseLighting] or [feSpecularLighting].
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FePointLight)
 public fun <T> fePointLight(content: context(AttributeConsumer, @SvgTagDSL FePointLight) () -> Unit): T {

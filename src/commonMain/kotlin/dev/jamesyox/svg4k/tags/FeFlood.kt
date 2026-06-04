@@ -43,6 +43,10 @@ public data object FeFlood :
     override val tagName: String = "feFlood"
 }
 
+/**
+ * The `<feFlood>` SVG filter primitive fills the filter subregion with the color and opacity defined by
+ * [dev.jamesyox.svg4k.attr.attrs.floodColor] and [dev.jamesyox.svg4k.attr.attrs.floodOpacity].
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeFlood)
 public fun <T> feFlood(content: context(AttributeConsumer, @SvgTagDSL FeFlood) () -> Unit): T {

@@ -68,6 +68,14 @@ public data object Pattern :
     override val tagName: String = "pattern"
 }
 
+/**
+ * The `<pattern>` SVG element defines a graphics object which can be redrawn at repeated x- and y-coordinate intervals
+ * ("tiled") to cover an area.
+ *
+ * The `<pattern>` is referenced by the [dev.jamesyox.svg4k.attr.attrs.fill] and/or
+ * [dev.jamesyox.svg4k.attr.attrs.stroke] attributes on other graphics elements to fill or stroke those
+ * elements with the referenced pattern.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Pattern)
 public fun <T> pattern(content: context(AttributeConsumer, @SvgTagDSL Pattern) () -> Unit): T {

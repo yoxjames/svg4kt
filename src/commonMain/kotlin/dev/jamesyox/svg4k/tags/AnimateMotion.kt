@@ -60,6 +60,9 @@ public data object AnimateMotion :
     override val tagName: String = "animateMotion"
 }
 
+/**
+ * The `<animateMotion>` SVG element provides a way to define how an element moves along a motion path.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.AnimateMotion)
 public fun <T> animateMotion(content: context(AttributeConsumer, @SvgTagDSL AnimateMotion) () -> Unit): T {

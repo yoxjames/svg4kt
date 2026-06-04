@@ -36,6 +36,9 @@ public data object FeMergeNode :
     override val tagName: String = "feMergeNode"
 }
 
+/**
+ * The `<feMergeNode>` SVG takes the result of another filter to be processed by its parent [feMerge].
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeMergeNode)
 public fun <T> feMergeNode(content: context(AttributeConsumer, @SvgTagDSL FeMergeNode) () -> Unit): T {

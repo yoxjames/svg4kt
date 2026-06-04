@@ -37,6 +37,10 @@ public data object Mpath :
     override val tagName: String = "mpath"
 }
 
+/**
+ * The `<mpath>` SVG sub-element for the [animateMotion] element provides the ability to reference an external [path]
+ * element as the definition of a motion path.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Mpath)
 public fun <T> mpath(content: context(AttributeConsumer, @SvgTagDSL Mpath) () -> Unit): T {

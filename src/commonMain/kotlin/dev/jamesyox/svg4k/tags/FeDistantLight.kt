@@ -38,6 +38,10 @@ public data object FeDistantLight :
     override val tagName: String = "feDistantLight"
 }
 
+/**
+ * The `<feDistantLight>` SVG element defines a distant light source that can be used within a lighting filter
+ * primitive: [feDiffuseLighting] or [feSpecularLighting].
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeDistantLight)
 public fun <T> feDistantLight(content: context(AttributeConsumer, @SvgTagDSL FeDistantLight) () -> Unit): T {

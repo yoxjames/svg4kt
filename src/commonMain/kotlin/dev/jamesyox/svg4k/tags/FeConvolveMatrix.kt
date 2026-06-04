@@ -50,6 +50,9 @@ public data object FeConvolveMatrix :
     override val tagName: String = "feConvolveMatrix"
 }
 
+/**
+ * See https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/feConvolveMatrix
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeConvolveMatrix)
 public fun <T> feConvolveMatrix(content: context(AttributeConsumer, @SvgTagDSL FeConvolveMatrix) () -> Unit): T {

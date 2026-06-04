@@ -67,6 +67,10 @@ public data object Path :
     override val tagName: String = "path"
 }
 
+/**
+ * The `<path>` SVG element is the generic element to define a shape. All the basic shapes can be created with a path
+ * element.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Path)
 public fun <T> path(content: context(AttributeConsumer, @SvgTagDSL Path) () -> Unit): T {

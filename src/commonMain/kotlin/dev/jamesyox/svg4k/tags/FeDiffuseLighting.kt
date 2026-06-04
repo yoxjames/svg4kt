@@ -49,6 +49,18 @@ public data object FeDiffuseLighting :
     override val tagName: String = "feDiffuseLighting"
 }
 
+/**
+ * The `<feDiffuseLighting>` SVG filter primitive lights an image using the alpha channel as a bump map.
+ * The resulting image, which is an RGBA opaque image, depends on the light color, light position and surface geometry
+ * of the input bump map.
+ *
+ * The light map produced by this filter primitive can be combined with a texture image using the multiply term of the
+ * arithmetic operator of the [feComposite] filter primitive. Multiple light sources can be simulated by adding several
+ * of these light maps together before applying it to the texture image.
+ *
+ * Like other filter primitives, it handles color components in the linearRGB color space by default.
+ * You can use [dev.jamesyox.svg4k.attr.attrs.colorInterpolationFilters] to use sRGB instead.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeColorMatrix)
 public fun <T> feDiffuseLighting(content: context(AttributeConsumer, @SvgTagDSL FeDiffuseLighting) () -> Unit): T {

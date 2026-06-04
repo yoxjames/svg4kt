@@ -72,6 +72,14 @@ public data object Svg :
     override val tagName: String = "svg"
 }
 
+/**
+ * The `<svg`> SVG element is a container that defines a new coordinate system and viewport.
+ * It is used as the outermost element of SVG documents, but it can also be used to embed an SVG fragment inside an
+ * SVG or HTML document.
+ *
+ * This element is for creating new SVG documents. If you have an existing SVG document to embed in another document
+ * via URL, use `<img>`, `<object>`, or [image].
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Svg)
 public fun <T> svg(content: context(AttributeConsumer, @SvgTagDSL Svg) () -> Unit): T {

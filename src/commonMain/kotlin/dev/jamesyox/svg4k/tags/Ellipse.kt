@@ -66,6 +66,10 @@ public data object Ellipse :
     override val tagName: String = "ellipse"
 }
 
+/**
+ * The `<ellipse>` SVG element is an SVG basic shape, used to create ellipses based on a center coordinate,
+ * and both their x and y radius.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Ellipse)
 public fun <T> ellipse(content: context(AttributeConsumer, @SvgTagDSL Ellipse) () -> Unit): T {

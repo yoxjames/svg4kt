@@ -53,6 +53,14 @@ public data object Switch :
     override val tagName: String = "switch"
 }
 
+/**
+ * The `<switch>` SVG element evaluates any `requiredFeatures`, [dev.jamesyox.svg4k.attr.attrs.requiredExtensions]
+ * and [dev.jamesyox.svg4k.attr.attrs.systemLanguage] attributes on its direct child elements in order, and then
+ * renders the first child where these attributes evaluate to true.
+ *
+ * Other direct children will be bypassed and therefore not rendered. If a child element is a container element, like
+ * [g], then its subtree is also processed/rendered or bypassed/not rendered.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Switch)
 public fun <T> switch(content: context(AttributeConsumer, @SvgTagDSL Switch) () -> Unit): T {

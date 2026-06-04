@@ -50,6 +50,10 @@ public data object RadialGradient :
     override val tagName: String = "radialGradient"
 }
 
+/**
+ * The `<radialGradient>` SVG element lets authors define radial gradients that can be applied to fill or stroke of
+ * graphical elements.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.RadialGradient)
 public fun <T> radialGradient(content: context(AttributeConsumer, @SvgTagDSL RadialGradient) () -> Unit): T {

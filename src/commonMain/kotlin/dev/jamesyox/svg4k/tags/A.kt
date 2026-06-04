@@ -66,6 +66,13 @@ public data object A :
     override val tagName: String = "a"
 }
 
+/**
+ * The `<a>` SVG element creates a hyperlink to other web pages, files, locations in the same page, email addresses, or
+ * any other URL. It is very similar to HTML's `<a>` element.
+ *
+ * SVG's `<a>` element is a container, which means you can create a link around text (like in HTML) but also around
+ * any shape.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.A)
 public fun <T> a(content: context(AttributeConsumer, @SvgTagDSL A) () -> Unit): T {

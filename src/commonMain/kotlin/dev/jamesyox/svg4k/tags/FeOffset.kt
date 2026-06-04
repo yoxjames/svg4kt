@@ -41,6 +41,11 @@ public data object FeOffset :
     override val tagName: String = "feOffset"
 }
 
+/**
+ * The `<feOffset>` SVG filter primitive enables offsetting an input image relative to its current position.
+ * The input image as a whole is offset by the values specified in the [dev.jamesyox.svg4k.attr.attrs.dx]
+ * and [dev.jamesyox.svg4k.attr.attrs.dy] attributes.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.FeOffset)
 public fun <T> feOffset(content: context(AttributeConsumer, @SvgTagDSL FeOffset) () -> Unit): T {

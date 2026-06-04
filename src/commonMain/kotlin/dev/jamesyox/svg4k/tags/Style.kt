@@ -35,6 +35,9 @@ public data object Style :
     override val tagName: String = "style"
 }
 
+/**
+ * The `<style>` SVG element allows style sheets to be embedded directly within SVG content.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Style)
 public fun <T> style(content: context (AttributeConsumer, @SvgTagDSL Style) () -> Unit): T {

@@ -63,6 +63,9 @@ public data object Circle :
     override val tagName: String = "circle"
 }
 
+/**
+ * The `<circle>` SVG element is an SVG basic shape, used to draw circles based on a center point and a radius.
+ */
 @IgnorableReturnValue
 context(_: TagConsumer<T>, _: ElementContainer.Circle)
 public fun <T> circle(content: context(AttributeConsumer, @SvgTagDSL Circle) () -> Unit): T {
