@@ -1,0 +1,82 @@
+/*
+ * Copyright 2026 James Yox
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+package dev.jamesyox.svg4kt.attr.attrs
+
+import dev.jamesyox.svg4kt.attr.AttributeConsumer
+import dev.jamesyox.svg4kt.attr.AttributeContainer
+import dev.jamesyox.svg4kt.attr.ConstantSvgAttributeType
+import dev.jamesyox.svg4kt.attr.SvgAttributeType
+import dev.jamesyox.svg4kt.attr.WrappedSvgAttributeType
+import dev.jamesyox.svg4kt.attr.types.obj.SvgId
+import dev.jamesyox.svg4kt.attr.types.obj.asUrl
+import dev.jamesyox.svg4kt.meta.noGet
+import dev.jamesyox.svg4kt.util.SetOnlyPropertyError
+import dev.jamesyox.svg4kt.attr.types.obj.Url as UrlType
+
+/**
+ * The `clip-path` presentation attribute defines or associates a clipping path with the element it is related to.
+ */
+context(
+    ac: AttributeConsumer,
+    _: AttributeContainer.ClipPath,
+)
+public var clipPath: ClipPath
+    @Deprecated(SetOnlyPropertyError, level = DeprecationLevel.ERROR)
+    get() = noGet()
+    set(value) {
+        ac["clip-path"] = value.svgString
+    }
+
+/**
+ * The `clip-path` presentation attribute defines or associates a clipping path with the element it is related to.
+ *
+ * This is a convenience method equivalent to:
+ * ```
+ * clipPath = ClipPath.Url(value)
+ * ```
+ */
+context(
+    ac: AttributeConsumer,
+    _: AttributeContainer.ClipPath,
+)
+public fun clipPath(value: UrlType) {
+    clipPath = ClipPath.Url(value)
+}
+
+/**
+ * The `clip-path` presentation attribute defines or associates a clipping path with the element it is related to.
+ *
+ * This is a convenience method equivalent to allowing you to set a [clipPath] to an
+ * [dev.jamesyox.svg4kt.attr.types.obj.SvgId] [Url]
+ */
+context(
+    ac: AttributeConsumer,
+    _: AttributeContainer.ClipPath,
+)
+public fun clipPath(id: SvgId) {
+    clipPath(id.asUrl())
+}
+
+public sealed interface ClipPath : SvgAttributeType {
+    public class Url(
+        public val value: UrlType,
+    ) : WrappedSvgAttributeType(value),
+        ClipPath
+
+    public data object None : ConstantSvgAttributeType("none")
+}

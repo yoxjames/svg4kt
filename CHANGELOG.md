@@ -1,4 +1,7 @@
 ## 0.1.0
+* Renamed library to svg4kt.
+  * I want to ensure this library is distinct from the company SVG4K as there is absolutely no connection between the
+    two.
 * Bumped Kotlin to 2.4.0. 
 * Added KDocs to SVG Elements.
 * `SvgColor.Hex(...)` no longer takes a number. This was wrong from the beginning. SVG's hex colors are a format
@@ -15,6 +18,7 @@
 * Added a `SvgPaint` type and used that on some attributes.
 * Added a `SvgId` type to be used with `id` attributes and added lots of convenience methods to take care of id
   resources and url to ID resources. 
+
 ## 0.1.0-alpha.2 
 * `get()` methods on svg attributes can no longer by called in Kotlin.
   * Previously they could throw. This should make it so that cannot happen if someone does this by mistake.

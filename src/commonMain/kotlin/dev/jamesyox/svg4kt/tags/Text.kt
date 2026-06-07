@@ -1,0 +1,103 @@
+/*
+ * Copyright 2026 James Yox
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+package dev.jamesyox.svg4kt.tags
+
+import dev.jamesyox.svg4kt.SvgTag
+import dev.jamesyox.svg4kt.SvgTagDSL
+import dev.jamesyox.svg4kt.TagConsumer
+import dev.jamesyox.svg4kt.attr.AttributeConsumer
+import dev.jamesyox.svg4kt.attr.AttributeContainer
+import dev.jamesyox.svg4kt.consumeTag
+import dev.jamesyox.svg4kt.tags.categories.category.GraphicsElement
+import dev.jamesyox.svg4kt.tags.categories.category.TextContentElement
+import dev.jamesyox.svg4kt.tags.categories.container.AnimationElementContainer
+import dev.jamesyox.svg4kt.tags.categories.container.DescriptiveElementContainer
+import dev.jamesyox.svg4kt.tags.categories.container.ElementContainer
+import dev.jamesyox.svg4kt.tags.categories.container.TextContentChildElementContainer
+import dev.jamesyox.svg4kt.tags.categories.container.TextContentContainer
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
+
+public data object Text :
+    SvgTag,
+    GraphicsElement,
+    TextContentElement,
+    AnimationElementContainer,
+    DescriptiveElementContainer,
+    TextContentChildElementContainer,
+    TextContentContainer,
+    ElementContainer.A,
+    AttributeContainer.AlignmentBaseline,
+    AttributeContainer.ClipPath,
+    AttributeContainer.Direction,
+    AttributeContainer.DominantBaseline,
+    AttributeContainer.Fill.Presentational,
+    AttributeContainer.FillOpacity,
+    AttributeContainer.FillRule,
+    AttributeContainer.FontFamily,
+    AttributeContainer.FontSize,
+    AttributeContainer.FontSizeAdjust,
+    AttributeContainer.FontStyle,
+    AttributeContainer.FontVariant,
+    AttributeContainer.FontWeight,
+    AttributeContainer.LengthAdjust,
+    AttributeContainer.LetterSpacing,
+    AttributeContainer.Mask,
+    AttributeContainer.Opacity,
+    AttributeContainer.PaintOrder,
+    AttributeContainer.PointerEvents,
+    AttributeContainer.RequiredExtensions,
+    AttributeContainer.Stroke,
+    AttributeContainer.StrokeDasharray,
+    AttributeContainer.StrokeDashoffset,
+    AttributeContainer.StrokeLinecap,
+    AttributeContainer.StrokeLinejoin,
+    AttributeContainer.StrokeMiterlimit,
+    AttributeContainer.StrokeOpacity,
+    AttributeContainer.StrokeWidth,
+    AttributeContainer.SystemLanguage,
+    AttributeContainer.TextAnchor,
+    AttributeContainer.TextDecoration,
+    AttributeContainer.TextOverflow,
+    AttributeContainer.TextRendering,
+    AttributeContainer.TextLength,
+    AttributeContainer.Transform,
+    AttributeContainer.UnicodeBidi,
+    AttributeContainer.VectorEffect,
+    AttributeContainer.Visibility,
+    AttributeContainer.WhiteSpace,
+    AttributeContainer.WordSpacing,
+    AttributeContainer.WritingMode {
+    override val tagName: String = "text"
+}
+
+/**
+ * The `<text>` SVG element draws a graphics element consisting of text. It's possible to apply a gradient, pattern,
+ * clipping path, mask, or filter to `<text>`, like any other SVG graphics element.
+ *
+ * If text is included in SVG not inside of a `<text>` element, it is not rendered. This is different than being
+ * hidden by default, as setting the display property won't show the text.
+ */
+@IgnorableReturnValue
+context(_: TagConsumer<T>, _: ElementContainer.Text)
+public fun <T> text(content: context(AttributeConsumer, @SvgTagDSL Text) () -> Unit): T {
+    contract {
+        callsInPlace(content, InvocationKind.EXACTLY_ONCE)
+    }
+    return consumeTag(tag = Text, content = content)
+}

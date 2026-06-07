@@ -145,7 +145,7 @@ mavenPublishing {
     pom {
         name = project.name
         description = "SVG Implementation in Kotlin as a DSL"
-        url = "https://github.com/yoxjames/svg4k"
+        url = "https://github.com/yoxjames/svg4kt"
 
         licenses {
             license {
@@ -163,9 +163,9 @@ mavenPublishing {
         }
 
         scm {
-            connection = "scm:git:github.com/yoxjames/svg4k.git"
-            developerConnection = "scm:git:ssh://github.com/yoxjames/svg4k.git"
-            url = "https://github.com/yoxjames/svg4k"
+            connection = "scm:git:github.com/yoxjames/svg4kt.git"
+            developerConnection = "scm:git:ssh://github.com/yoxjames/svg4kt.git"
+            url = "https://github.com/yoxjames/svg4kt"
         }
     }
 }

@@ -1,0 +1,70 @@
+/*
+ * Copyright 2026 James Yox
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+package dev.jamesyox.svg4kt.attr.attrs
+
+import dev.jamesyox.svg4kt.attr.AttributeConsumer
+import dev.jamesyox.svg4kt.attr.AttributeContainer
+import dev.jamesyox.svg4kt.attr.set
+import dev.jamesyox.svg4kt.attr.types.obj.LengthOrPercentage
+import dev.jamesyox.svg4kt.meta.noGet
+import dev.jamesyox.svg4kt.tags.Line
+import dev.jamesyox.svg4kt.tags.LinearGradient
+import dev.jamesyox.svg4kt.util.SetOnlyPropertyError
+
+/**
+ * For [Line], [x2] defines the x coordinate of the ending point of the line.
+ */
+context(
+    ac: AttributeConsumer,
+    _: Line
+)
+public var x2: LengthOrPercentage
+    @Deprecated(SetOnlyPropertyError, level = DeprecationLevel.ERROR)
+    get() = noGet()
+    set(value) {
+        ac["x2"] = value
+    }
+
+/**
+ * For [LinearGradient], [x2] defines the x coordinate of the ending point of the _gradient vector_ used to map the
+ * gradient stop values. The exact behavior of this attribute is influenced by the [gradientUnits] attributes
+ */
+context(
+    ac: AttributeConsumer,
+    _: LinearGradient
+)
+public var x2: LengthOrPercentage
+    @Deprecated(SetOnlyPropertyError, level = DeprecationLevel.ERROR)
+    get() = noGet()
+    set(value) {
+        ac["x2"] = value
+    }
+
+/**
+ * Unsafe version of [x2]. Functionality depends on what [dev.jamesyox.svg4kt.SvgTag] is the parent.
+ */
+context(
+    ac: AttributeConsumer,
+    _: AttributeContainer.X2
+)
+public var x2: LengthOrPercentage
+    @Deprecated(SetOnlyPropertyError, level = DeprecationLevel.ERROR)
+    get() = noGet()
+    set(value) {
+        ac["x2"] = value
+    }

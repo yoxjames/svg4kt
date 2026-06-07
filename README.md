@@ -1,23 +1,13 @@
-# SVG For Kotlin (svg4k)
-![Maven Central Version](https://img.shields.io/maven-central/v/dev.jamesyox/svg4k)
+# svg4kt (SVG For Kotlin)
+![Maven Central Version](https://img.shields.io/maven-central/v/dev.jamesyox/svg4kt)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Kotlin](https://img.shields.io/badge/kotlin-2.3.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
 
 This library is an implementation of the current [second edition of the SVG 1.1 spec](https://www.w3.org/TR/SVG11/) 
 as a Kotlin DSL (or type safe builder). This library strives for maximal type safety and the avoidance of string typing 
-as much as possible. This library makes use of the currently experimental multiple 
-[context parameters](https://kotlinlang.org/docs/context-parameters.html) feature in Kotlin. The library's design 
-(and some of the implementation) is based on [kotlinx-html](https://github.com/Kotlin/kotlinx.html). 
-Like kotlinx-html, this library is fully multiplatform and can generate DOM elements on the js and wasmJs targets.
-
-## Current State
-This library is essentially a work in progress that I have decided to do in the public view. That means that in the
-current state, this library is not up to my standards for "open source." I encourage you to try it out if you found this
-page but be aware that there may be bugs. See the section below on the `unsafe` API for says to get around any bugs you
-face. I encourage feedback and plan to continue developing this into a high quality open source library.
-
-This artifact is now being used for my [Kastro Demo](https://github.com/yoxjames/kastro-demo) project to render all the
-SVGs.
+as much as possible. This library makes use of multiple [context parameters](https://kotlinlang.org/docs/context-parameters.html) feature in Kotlin. The library's design 
+(and some of the implementation) is based on [kotlinx-html](https://github.com/Kotlin/kotlinx.html). Like kotlinx-html, this library is fully multiplatform 
+and can generate DOM elements on the js and wasmJs targets.
 
 ## Getting Started
 An alpha version of this library is published on Maven Central.
@@ -25,13 +15,13 @@ Coordinates:
 
 groupId: `dev.jamesyox`
 
-artifactId: `svg4k`
+artifactId: `svg4kt`
 
-version: `0.1.0-beta.1`
+version: `0.1.0`
 
-If you use Gradle you should be able to add the following to your dependencies to use svg4k:
+If you use Gradle you should be able to add the following to your dependencies to use svg4kt:
 ```kotlin
-implementation("dev.jamesyox:svg4k:0.1.0-beta.1")
+implementation("dev.jamesyox:svg4kt:0.1.0")
 ```
 
 You are now free to use this in a project, however you _must_ enable context parameters. This library is based around
@@ -42,16 +32,13 @@ enable anything.
 // build.gradle.kts
 kotlin {
     compilerOptions {
-        // Wont be required once Kotlin 2.4.0 releases
+        // This is required for Kotlin 2.3.X and no longer needed for Kotlin 2.4.0
         freeCompilerArgs.add("-Xcontext-parameters")
     }
 }
 // ....
-implementation("dev.jamesyox:svg4k:0.1.0-beta.1")
+implementation("dev.jamesyox:svg4kt:0.1.0")
 ```
-
-Please note that this library is an alpha and is based around a currently experimental Kotlin language feature. Therefore, you should 
-use caution before using this for anything too serious.
 
 ### Stream
 If you are familiar with the `kotlinx-html` then the syntax should feel pretty familiar:
@@ -109,13 +96,13 @@ Would output
 </svg>
 ```
 
-Which if rendered by a browser would look like:
+Which, if rendered by a browser, would look like:
 ![AnimationMotion Mozilla Example SVG](./samples/AnimateMotionMozillaExample.svg)
 *Source: https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/animateMotion*
 
 I eventually plan to add more docs but a good overview of the syntax can be found in the tests I have written so far.
 
-https://github.com/yoxjames/svg4k/tree/main/src/commonTest/kotlin/dev/jamesyox/svg4k/tags
+https://github.com/yoxjames/svg4kt/tree/main/src/commonTest/kotlin/dev/jamesyox/svg4kt/tags
 
 Also like `kotlinx-html` this builder can be used on any `Appendable`. This is done with the `appendSVG { ... }` 
 extension fun.
@@ -126,7 +113,7 @@ FileWriter("image.svg").use { it.appendSVG { svg { /* ... */ } } }
 ```
 
 ### DOM
-Like `kotlinx-html` this project can be used on Js and WasmJS to generate DOM elements instead of just text. For
+Like `kotlinx-html` this project can be used on JS and WasmJS to generate DOM elements instead of just text. For
 example:
 
 ```kotlin
@@ -150,8 +137,8 @@ with `kotlinx-html`. Ideally I want to do something like this:
 ```kotlin
 html { // kotlinx-html
     body { // kotlin-html
-        svg { // svg4k >>> THIS DOES NOT CURRENTLY WORK
-            // ... // svg4k
+        svg { // svg4kt >>> THIS DOES NOT CURRENTLY WORK
+            // ... // svg4kt
         }
     }
 }
@@ -160,48 +147,96 @@ With context parameters this should be possible. On most targets it pretty much 
 like this:
 
 ```kotlin
-private fun HTMLTag.svg4k(
+private fun HTMLTag.svg4kt(
     block: context(AttributeConsumer, @SvgTagDSL Svg) () -> Unit
 ) {
     unsafe {
-        raw(svgString { dev.jamesyox.svg4k.tags.svg { block() } })
+        raw(svgString { dev.jamesyox.svg4kt.tags.svg { block() } })
     }
 }
 ```
 
-This function bridges `kotlinx-html` to `svg4k` by basically tapping into the unsafe raw text api 
+This function bridges `kotlinx-html` to `svg4kt` by basically tapping into the unsafe raw text api 
 from `kotlinx-html`. This works for many use cases but if you attempt this same approach on a `TagConsumer<T>` that uses
 the DOM, this will not work. Appending text will not generate dom elements. For that you'll need something much more
 ugly like this:
 
 ```kotlin
-fun <T> TagConsumer<HTMLElement>.svgMagick(
-  block: context(dev.jamesyox.svg4k.TagConsumer<SVGElement>, RootContainer) () -> T
+fun <T> TagConsumer<HTMLElement>.svg4kt(
+    block: context(dev.jamesyox.svg4kt.TagConsumer<SVGElement>, RootContainer) () -> T
 ): T {
-  val tagConsumer = JsDomTagConsumer(document)
-  val output = block(tagConsumer, RootContainer)
-  val svgDom = tagConsumer.output()
-  val hackDiv = div { } // We simply need to create a DOM element to access the parent (wasteful)
-  val currentNode = hackDiv.parentNode
-  currentNode?.removeChild(hackDiv)
+    val tagConsumer = JsDomTagConsumer(document)
+    val output = block(tagConsumer, RootContainer)
+    val svgDom = tagConsumer.output()
+    val hackDiv = div { } // We simply need to create a DOM element to access the parent (wasteful)
+    val currentNode = hackDiv.parentNode
+    currentNode?.removeChild(hackDiv)
 
-  currentNode?.let {
-    svgDom.forEach { child -> it.appendChild(child) }
-  }
-  return output
+    currentNode?.let {
+        svgDom.forEach { child -> it.appendChild(child) }
+    }
+    return output
 }
 ```
 I'm hoping to open a PR with `kotlinx-html` soon that should make seamless interop possible. 
 
-PR: https://github.com/Kotlin/kotlinx.html/pull/296
+PR: https://github.com/Kotlin/kotlinx.html/pull/296 (currently merged awaiting the next release)
 
 If you want to see a full project using the library like this please check out my Kastro Demo project. It's a simple
 static site that can show you information about the sun and moon via SVGs done locally in your browser!
 
 https://github.com/yoxjames/kastro-demo
 
+## Convenience Functions
+Many web standards make use of "union" types for what's valid for a given attribute. Lets take an element like `<circle>`
+and an attribute like `fill`. This takes an input type called `Paint` which MDN defines as such:
+
+```text
+paint ::= none | <color> | <url> [none | <color>]? | context-fill | context-stroke
+```
+
+In Kotlin, since we dont have proper union type support, this would typically be defined this as a sealed interface. 
+In fact, you can see my exact implementation in `SvgPaint`.
+
+If you wanted to set a circle to be filled with the color red you would have to do something like this:
+
+```kotlin
+circle {
+    fill = SvgPaint.Color(SvgColor.Red)
+}
+```
+
+That's rather verbose having to constantly provide boxed types. When not in Kotlin you could simple set fill to Red,
+rather than worrying about boxing. 
+
+Ideally I'd like to be able to override setters, so I could support something like this which would be very natural
+even without proper union types:
+
+```kotlin
+// THIS DOES NOT WORK
+circle {
+    fill = SvgColor.Red
+}
+```
+
+Setter overrides are not supported in Kotlin. I would encourage you to upvote the following issue. If this gets added to
+the language I'll make sure this library supports it.
+https://youtrack.jetbrains.com/issue/KT-4075
+
+Since I cannot do this I decided to use a workaround and follow a convention. I am able to use function overriding to 
+emulate this functionality. For many properties I have simple defined functions named the same as the property that can take
+the types that I boxed into the "union." So for fill you can simply pass a color like this:
+
+```kotlin
+circle {
+    fill(SvgColor.Red) // This is the compromise
+}
+```
+
+I wish I could get the "setter" syntax here but this accomplishes the goal even if it reads a little worse.
+
 ## Unsafe DSL
-This library may have bugs. A lot of those bugs may be around typing and scoping. Lets say for some reason `cx` was
+This library may have bugs. A lot of those bugs may be around typing and scoping. Hypothetically lets say for some reason `cx` was
 now allowed on `Circle` elements. You could force the issue like this:
 
 ```kotlin
@@ -318,8 +353,7 @@ circle {
 
 ## Contributing
 Contributions are welcome. If you find a bug and want to fix it, feel free to do so and open a PR. Additionally, if you
-are looking for places to contribute, simply search for TODO and you'll see every area I have identified as lacking and
-want to address prior to release. There's a lot of work still to be done!
+are looking for places to contribute, simply search for TODO and you'll see every area I have identified as lacking.
 
 ## Citations
 * A lot of this project was inspired by `kotlinx-html` by JetBrains, the overall design was reused but reimagined using multiple context parameters. A lot of the tag consumption logic was based on the tag consumption in kotlinx-html
