@@ -1,7 +1,7 @@
 # svg4kt (SVG For Kotlin)
 ![Maven Central Version](https://img.shields.io/maven-central/v/dev.jamesyox/svg4kt)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
-[![Kotlin](https://img.shields.io/badge/kotlin-2.3.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/kotlin-2.4.0-blue.svg?logo=kotlin)](http://kotlinlang.org)
 
 This library is an implementation of the current [second edition of the SVG 1.1 spec](https://www.w3.org/TR/SVG11/) 
 as a Kotlin DSL (or type safe builder). This library strives for maximal type safety and the avoidance of string typing 
