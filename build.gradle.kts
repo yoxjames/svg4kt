@@ -49,7 +49,6 @@ detekt {
 
 kotlin {
     compilerOptions {
-        freeCompilerArgs.add("-Xallow-contracts-on-more-functions")
         freeCompilerArgs.add("-opt-in=kotlin.contracts.ExperimentalContracts")
         freeCompilerArgs.add("-Xreturn-value-checker=full")
     }
