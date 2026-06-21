@@ -1,3 +1,7 @@
+## 0.2.0 (Upcoming)
+* Added convenience functions for `fontSize` for `FontSize.Value` types.
+  * `fontSize = FontSize.Value(12.none)` can now be written as `fontSize(12)` or `fontSize(12.none)`
+
 ## 0.1.0
 * Renamed library to svg4kt.
   * I want to ensure this library is distinct from the company SVG4K as there is absolutely no connection between the

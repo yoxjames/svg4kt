@@ -23,6 +23,7 @@ import dev.jamesyox.svg4kt.attr.SvgAttributeType
 import dev.jamesyox.svg4kt.attr.WrappedSvgAttributeType
 import dev.jamesyox.svg4kt.attr.set
 import dev.jamesyox.svg4kt.attr.types.obj.LengthOrPercentage
+import dev.jamesyox.svg4kt.attr.types.obj.none
 import dev.jamesyox.svg4kt.meta.noGet
 import dev.jamesyox.svg4kt.util.SetOnlyPropertyError
 
@@ -40,6 +41,30 @@ public var fontSize: FontSize
     set(value) {
         ac["font-size"] = value
     }
+
+/**
+ * The font-size attribute refers to the size of the font from baseline to baseline when multiple lines of text are
+ * set solid in a multiline layout environment.
+ */
+context(
+    ac: AttributeConsumer,
+    _: AttributeContainer.FontSize
+)
+public fun fontSize(value: LengthOrPercentage) {
+    fontSize = FontSize.Value(value)
+}
+
+/**
+ * The font-size attribute refers to the size of the font from baseline to baseline when multiple lines of text are
+ * set solid in a multiline layout environment.
+ */
+context(
+    ac: AttributeConsumer,
+    _: AttributeContainer.FontSize
+)
+public fun fontSize(value: Number) {
+    fontSize = FontSize.Value(value.none)
+}
 
 public sealed interface FontSize : SvgAttributeType {
     public class Absolute(

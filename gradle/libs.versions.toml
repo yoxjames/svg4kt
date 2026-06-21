@@ -1,5 +1,5 @@
 [versions]
-current = "0.1.0"
+current = "0.2.0-SNAPSHOT"
 benmanes-versions = "0.54.0"
 kotlin = "2.4.0"
 detekt = "1.23.8"
